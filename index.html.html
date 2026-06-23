@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Amin Saadati — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-pale: #F5EDD8;
+    --cream: #FAF8F3;
+    --ink: #1A1814;
+    --ink-mid: #3A3630;
+    --ink-light: #7A7468;
+    --ink-faint: #B8B2A8;
+    --white: #FFFFFF;
+    --section-gap: 140px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed; width: 8px; height: 8px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  }
+  .cursor.hover { width: 0; height: 0; opacity: 0; }
+  .cursor-ring.hover { width: 60px; height: 60px; border-color: var(--gold); }
+
+  /* Canvas background */
+  #bg-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0; opacity: 0.35;
+    pointer-events: none;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s ease, padding 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(26,24,20,0.92);
+    backdrop-filter: blur(12px);
+    padding: 18px 60px;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; letter-spacing: 3px;
+    color: var(--gold); text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 44px; list-style: none; }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--ink-faint); text-decoration: none;
+    transition: color 0.3s ease; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Sections */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 0 40px;
+    overflow: hidden;
+  }
+  .hero-content { position: relative; }
+  .hero-eyebrow {
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 32px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(64px, 10vw, 130px);
+    font-weight: 300; line-height: 0.92;
+    letter-spacing: -1px; color: var(--cream);
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 1.2s ease 0.8s forwards;
+  }
+  .hero-name em { font-style: italic; color: var(--gold-light); }
+  .hero-line {
+    width: 0; height: 1px; background: var(--gold);
+    margin: 40px auto;
+    animation: lineGrow 1s ease 1.6s forwards;
+  }
+  .hero-tagline {
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 300;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 1s ease 1.8s forwards;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 48px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    opacity: 0; animation: fadeUp 1s ease 2.4s forwards;
+  }
+  .hero-scroll span {
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .scroll-line {
+    width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out 3s infinite;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes lineGrow {
+    to { width: 80px; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: var(--section-gap) 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .about-image-wrap {
+    position: relative; aspect-ratio: 3/4; max-width: 420px;
+  }
+  .about-frame {
+    position: absolute; inset: -16px 16px 16px -16px;
+    border: 1px solid rgba(201,168,76,0.25); border-radius: 2px;
+    pointer-events: none;
+  }
+  .about-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(145deg, #2A2720 0%, #1A1814 100%);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .about-placeholder-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 88px; font-weight: 300; color: rgba(201,168,76,0.2);
+    letter-spacing: -2px;
+  }
+  .about-decor {
+    position: absolute; bottom: -8px; right: -8px;
+    width: 64px; height: 64px;
+    border-right: 1px solid var(--gold); border-bottom: 1px solid var(--gold);
+  }
+  .about-text {}
+  .section-label {
+    font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 32px; height: 1px;
+    background: var(--gold);
+  }
+  .about-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300; line-height: 1.1;
+    margin-bottom: 28px; color: var(--cream);
+  }
+  .about-heading em { font-style: italic; color: var(--gold-light); }
+  .about-body {
+    font-size: 15px; line-height: 1.9; color: var(--ink-faint);
+    font-weight: 300; margin-bottom: 20px;
+  }
+  .about-quote {
+    margin-top: 40px; padding-left: 24px;
+    border-left: 1px solid rgba(201,168,76,0.4);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic; color: var(--gold-light);
+    line-height: 1.5;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { padding: var(--section-gap) 60px; max-width: 1300px; margin: 0 auto; }
+  .projects-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 72px;
+  }
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 300; line-height: 1;
+    color: var(--cream);
+  }
+  .section-heading em { font-style: italic; color: var(--gold-light); }
+  .projects-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px; font-weight: 300;
+    color: rgba(201,168,76,0.15); line-height: 1;
+  }
+
+  .projects-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  }
+  .project-card {
+    position: relative; overflow: hidden; cursor: none;
+    background: #211F1C;
+  }
+  .project-card:first-child {
+    grid-column: 1 / -1;
+  }
+  .project-card-inner {
+    padding: 64px 56px;
+    min-height: 340px; display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative; z-index: 2;
+    transition: padding 0.5s ease;
+  }
+  .project-card:first-child .project-card-inner { min-height: 440px; }
+
+  .project-bg {
+    position: absolute; inset: 0; z-index: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .project-card:hover .project-bg { opacity: 1; }
+
+  .project-bg-1 { background: linear-gradient(135deg, #1E1A2E 0%, #2D1F3D 100%); }
+  .project-bg-2 { background: linear-gradient(135deg, #1A1E2A 0%, #1F2D3D 100%); }
+  .project-bg-3 { background: linear-gradient(135deg, #2A1A1A 0%, #3D1F1F 100%); }
+  .project-bg-4 { background: linear-gradient(135deg, #1A2A1E 0%, #1F3D25 100%); }
+
+  .project-num {
+    font-size: 10px; letter-spacing: 4px; color: var(--gold);
+    margin-bottom: 20px; font-family: 'Inter', sans-serif;
+  }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 300; color: var(--cream);
+    margin-bottom: 12px; line-height: 1.1;
+  }
+  .project-card:first-child .project-title { font-size: 52px; }
+  .project-desc {
+    font-size: 13px; color: var(--ink-faint); line-height: 1.7;
+    max-width: 480px; margin-bottom: 28px;
+  }
+  .project-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+  .project-tag {
+    font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
+    padding: 6px 14px; border-radius: 1px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  .project-card:hover .project-tag {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.6);
+  }
+  .project-arrow {
+    position: absolute; top: 48px; right: 48px; z-index: 2;
+    width: 44px; height: 44px;
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 18px;
+    transform: rotate(-45deg) scale(0.8);
+    opacity: 0; transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .project-card:hover .project-arrow {
+    opacity: 1; transform: rotate(0deg) scale(1);
+  }
+
+  /* ── SKILLS ── */
+  #skills {
+    padding: var(--section-gap) 60px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .skills-layout {
+    display: grid; grid-template-columns: 300px 1fr; gap: 100px;
+    align-items: start; margin-top: 72px;
+  }
+  .skills-intro {
+    position: sticky; top: 120px;
+  }
+  .skills-intro p {
+    font-size: 14px; line-height: 1.9; color: var(--ink-faint);
+    font-weight: 300; margin-top: 20px;
+  }
+  .skills-categories { display: flex; flex-direction: column; gap: 56px; }
+  .skill-category-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--cream);
+    margin-bottom: 28px; border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding-bottom: 16px;
+  }
+  .skill-bars { display: flex; flex-direction: column; gap: 18px; }
+  .skill-item { display: grid; grid-template-columns: 160px 1fr 40px; align-items: center; gap: 20px; }
+  .skill-name { font-size: 12px; letter-spacing: 1.5px; color: var(--ink-faint); text-transform: uppercase; }
+  .skill-track {
+    height: 1px; background: rgba(255,255,255,0.08); position: relative;
+    overflow: visible;
+  }
+  .skill-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: linear-gradient(to right, rgba(201,168,76,0.6), var(--gold));
+    width: 0; transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .skill-fill.animated { }
+  .skill-dot {
+    position: absolute; right: -4px; top: -3.5px;
+    width: 8px; height: 8px; background: var(--gold); border-radius: 50%;
+    opacity: 0; transition: opacity 1.4s ease;
+  }
+  .skill-fill.animated .skill-dot { opacity: 1; }
+  .skill-pct { font-size: 12px; color: var(--gold); font-weight: 300; }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: var(--section-gap) 60px;
+    text-align: center; position: relative;
+    overflow: hidden;
+  }
+  .contact-bg-text {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 240px; font-weight: 300;
+    color: rgba(201,168,76,0.04); white-space: nowrap;
+    pointer-events: none; letter-spacing: -8px;
+    z-index: 0;
+  }
+  .contact-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+  .contact-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 100px);
+    font-weight: 300; line-height: 1; color: var(--cream);
+    margin-bottom: 32px;
+  }
+  .contact-heading em { font-style: italic; color: var(--gold-light); }
+  .contact-sub {
+    font-size: 14px; line-height: 1.9; color: var(--ink-faint);
+    font-weight: 300; margin-bottom: 56px; max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+  .contact-links { display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; margin-bottom: 64px; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 18px 36px;
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--gold-light); text-decoration: none;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .contact-link::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(201,168,76,0.06);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .contact-link:hover::before { transform: scaleX(1); }
+  .contact-link:hover { border-color: rgba(201,168,76,0.5); color: var(--gold); }
+  .contact-link-primary {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold);
+  }
+  .contact-divider {
+    width: 60px; height: 1px; background: rgba(201,168,76,0.2);
+    margin: 0 auto 40px;
+  }
+  .contact-email {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; font-style: italic;
+    color: var(--ink-faint);
+  }
+  .contact-email a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+  .contact-email a:hover { color: var(--gold-light); }
+
+  /* Footer */
+  footer {
+    padding: 40px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(201,168,76,0.08);
+    position: relative; z-index: 1;
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 300; color: var(--ink-faint);
+    letter-spacing: 2px;
+  }
+  .footer-copy {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(122,116,104,0.5);
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { gap: 24px; }
+    #about { grid-template-columns: 1fr; padding: 80px 24px; }
+    #projects, #skills, #contact { padding: 80px 24px; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .skills-intro { position: static; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card:first-child { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <a href="#" class="nav-logo">A · S</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Portfolio — 2025</div>
+    <h1 class="hero-name">Amin<br><em>Saadati</em></h1>
+    <div class="hero-line"></div>
+    <div class="hero-tagline">Ambitious · Creative · Driven</div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="about-image-wrap reveal">
+    <div class="about-placeholder">
+      <span class="about-placeholder-text">AS</span>
+    </div>
+    <div class="about-frame"></div>
+    <div class="about-decor"></div>
+  </div>
+  <div class="about-text">
+    <div class="section-label reveal">About me</div>
+    <h2 class="about-heading reveal reveal-delay-1">A mind shaped<br>by <em>curiosity</em></h2>
+    <p class="about-body reveal reveal-delay-2">
+      I am a driven and detail-oriented individual with a passion for building things that matter. My academic journey and projects reflect a commitment to excellence — blending rigorous thinking with creative problem-solving.
+    </p>
+    <p class="about-body reveal reveal-delay-3">
+      Whether collaborating on complex challenges or working independently, I bring focus, adaptability, and a genuine desire to contribute to meaningful work.
+    </p>
+    <blockquote class="about-quote reveal reveal-delay-4">
+      "Excellence is not a destination,<br>but a way of travelling."
+    </blockquote>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="projects-header">
+    <div>
+      <div class="section-label reveal">Selected Work</div>
+      <h2 class="section-heading reveal reveal-delay-1">Featured<br><em>Projects</em></h2>
+    </div>
+    <div class="projects-count reveal">04</div>
+  </div>
+  <div class="projects-grid">
+    <!-- Card 1 (full width) -->
+    <div class="project-card reveal">
+      <div class="project-bg project-bg-1"></div>
+      <div class="project-arrow">→</div>
+      <div class="project-card-inner">
+        <div class="project-num">01</div>
+        <h3 class="project-title">Project Title One</h3>
+        <p class="project-desc">A compelling description of your flagship project — what problem it solves, what you built, and why it stands out. Replace this with your actual work.</p>
+        <div class="project-tags">
+          <span class="project-tag">Research</span>
+          <span class="project-tag">Design</span>
+          <span class="project-tag">2025</span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="project-card reveal reveal-delay-1">
+      <div class="project-bg project-bg-2"></div>
+      <div class="project-arrow">→</div>
+      <div class="project-card-inner">
+        <div class="project-num">02</div>
+        <h3 class="project-title">Project Title Two</h3>
+        <p class="project-desc">A short description of this project and your key contributions.</p>
+        <div class="project-tags">
+          <span class="project-tag">Engineering</span>
+          <span class="project-tag">Innovation</span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="project-card reveal reveal-delay-2">
+      <div class="project-bg project-bg-3"></div>
+      <div class="project-arrow">→</div>
+      <div class="project-card-inner">
+        <div class="project-num">03</div>
+        <h3 class="project-title">Project Title Three</h3>
+        <p class="project-desc">Highlight what made this project unique and your specific role in it.</p>
+        <div class="project-tags">
+          <span class="project-tag">Leadership</span>
+          <span class="project-tag">Analysis</span>
+        </div>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="project-card reveal reveal-delay-3">
+      <div class="project-bg project-bg-4"></div>
+      <div class="project-arrow">→</div>
+      <div class="project-card-inner">
+        <div class="project-num">04</div>
+        <h3 class="project-title">Project Title Four</h3>
+        <p class="project-desc">Describe the outcome, tools used, and what you learned from this project.</p>
+        <div class="project-tags">
+          <span class="project-tag">Strategy</span>
+          <span class="project-tag">Development</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-label reveal">Capabilities</div>
+  <h2 class="section-heading reveal reveal-delay-1">Skills &amp;<br><em>Expertise</em></h2>
+  <div class="skills-layout">
+    <div class="skills-intro reveal">
+      <p>A curated overview of the competencies I've developed through academic work, projects, and self-directed learning.</p>
+    </div>
+    <div class="skills-categories">
+
+      <div class="reveal">
+        <div class="skill-category-title">Core Competencies</div>
+        <div class="skill-bars">
+          <div class="skill-item">
+            <span class="skill-name">Critical Thinking</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="92"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">92%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Research</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="88"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">88%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Problem Solving</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="90"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">90%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Communication</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="85"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">85%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <div class="skill-category-title">Technical Skills</div>
+        <div class="skill-bars">
+          <div class="skill-item">
+            <span class="skill-name">Skill One</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="86"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">86%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Skill Two</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="78"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">78%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Skill Three</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="82"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">82%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="skill-category-title">Languages</div>
+        <div class="skill-bars">
+          <div class="skill-item">
+            <span class="skill-name">Language 1</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="100"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">Native</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Language 2</span>
+            <div class="skill-track"><div class="skill-fill" data-pct="80"><div class="skill-dot"></div></div></div>
+            <span class="skill-pct">Fluent</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-bg-text">CONTACT</div>
+  <div class="contact-inner">
+    <div class="section-label reveal" style="justify-content:center">Let's Connect</div>
+    <h2 class="contact-heading reveal reveal-delay-1">Get in<br><em>Touch</em></h2>
+    <p class="contact-sub reveal reveal-delay-2">
+      Whether you're a university admissions team or a future employer — I'd love to hear from you and explore how I can contribute.
+    </p>
+    <div class="contact-links reveal reveal-delay-3">
+      <a href="mailto:amin@example.com" class="contact-link contact-link-primary">
+        ✉ Send a message
+      </a>
+      <a href="#" class="contact-link">↓ Download CV</a>
+      <a href="#" class="contact-link">in LinkedIn</a>
+    </div>
+    <div class="contact-divider reveal reveal-delay-4"></div>
+    <div class="contact-email reveal reveal-delay-4">
+      <a href="mailto:amin@example.com">amin@example.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-name">Amin Saadati</div>
+  <div class="footer-copy">© 2025 — All rights reserved</div>
+</footer>
+
+<script>
+// ── Animated canvas background ──
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', () => { resize(); initParticles(); });
+
+class Particle {
+  constructor() { this.reset(true); }
+  reset(random = false) {
+    this.x = Math.random() * W;
+    this.y = random ? Math.random() * H : H + 20;
+    this.size = Math.random() * 1.2 + 0.3;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = -(Math.random() * 0.4 + 0.15);
+    this.opacity = Math.random() * 0.6 + 0.2;
+    this.life = 0;
+    this.maxLife = Math.random() * 300 + 200;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life++;
+    const lifePct = this.life / this.maxLife;
+    this.currentOpacity = this.opacity * (lifePct < 0.2 ? lifePct / 0.2 : lifePct > 0.8 ? 1 - (lifePct - 0.8) / 0.2 : 1);
+    if (this.life >= this.maxLife) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.currentOpacity;
+    ctx.fillStyle = '#C9A84C';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// Lines
+class Line {
+  constructor() { this.reset(true); }
+  reset(random = false) {
+    this.x = Math.random() * W;
+    this.y = random ? Math.random() * H : H + 50;
+    this.len = Math.random() * 60 + 20;
+    this.speed = Math.random() * 0.6 + 0.3;
+    this.opacity = Math.random() * 0.2 + 0.05;
+    this.life = 0; this.maxLife = Math.random() * 400 + 300;
+  }
+  update() {
+    this.y -= this.speed; this.life++;
+    const lp = this.life / this.maxLife;
+    this.cur = this.opacity * (lp < 0.15 ? lp / 0.15 : lp > 0.85 ? 1 - (lp - 0.85) / 0.15 : 1);
+    if (this.life >= this.maxLife) this.reset();
+  }
+  draw() {
+    ctx.save(); ctx.globalAlpha = this.cur;
+    const grad = ctx.createLinearGradient(this.x, this.y, this.x, this.y + this.len);
+    grad.addColorStop(0, 'rgba(201,168,76,0)');
+    grad.addColorStop(0.5, 'rgba(201,168,76,0.8)');
+    grad.addColorStop(1, 'rgba(201,168,76,0)');
+    ctx.strokeStyle = grad; ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(this.x, this.y + this.len);
+    ctx.stroke(); ctx.restore();
+  }
+}
+
+let lines = [];
+function initParticles() {
+  particles = Array.from({length: 80}, () => new Particle());
+  lines = Array.from({length: 20}, () => new Line());
+}
+initParticles();
+
+function drawGrid() {
+  ctx.save(); ctx.globalAlpha = 0.03; ctx.strokeStyle = '#C9A84C'; ctx.lineWidth = 0.5;
+  const step = 80;
+  for (let x = 0; x < W; x += step) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += step) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function animate() {
+  ctx.clearRect(0, 0, W, H);
+  drawGrid();
+  particles.forEach(p => { p.update(); p.draw(); });
+  lines.forEach(l => { l.update(); l.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ── Custom cursor ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function cursorLoop() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(cursorLoop);
+})();
+document.querySelectorAll('a, button, .project-card, .contact-link').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+
+// ── Nav scroll ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── Scroll reveal ──
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+reveals.forEach(el => revealObs.observe(el));
+
+// ── Skill bar animation ──
+const skillFills = document.querySelectorAll('.skill-fill');
+const skillObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const pct = e.target.dataset.pct;
+      e.target.style.width = pct + '%';
+      e.target.classList.add('animated');
+      skillObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+skillFills.forEach(el => skillObs.observe(el));
+
+// ── Parallax hero ──
+window.addEventListener('scroll', () => {
+  const hero = document.getElementById('hero');
+  const s = window.scrollY;
+  hero.style.transform = `translateY(${s * 0.3}px)`;
+});
+</script>
+</body>
+</html>
