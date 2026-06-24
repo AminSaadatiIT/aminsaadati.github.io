@@ -3,210 +3,205 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Amin Saadati — Digital Portfolio</title>
+<title>Amin Saadati — Secure Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 <style>
-  :root {
-    --gold: #C9A84C; --gold-light: #E8D5A3; --ink: #1A1814; --ink-mid: #3A3630; --cream: #FAF8F3; --section-gap: 120px;
-  }
+  :root { --gold: #C9A84C; --gold-l: #E8D5A3; --ink: #1A1814; --ink-m: #3A3630; --cream: #FAF8F3; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background: var(--ink); color: var(--cream); overflow-x: hidden; }
+  body { font-family: 'Inter', sans-serif; background: var(--ink); color: var(--cream); overflow-x: hidden; cursor: none; }
 
-  /* NAVIGATION */
+  /* ── UI ELEMENTS ── */
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease; }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.15s ease; }
   nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 25px 60px; display: flex; justify-content: space-between; align-items: center; transition: 0.4s; }
-  nav.scrolled { background: rgba(26,24,20,0.95); backdrop-filter: blur(10px); padding: 15px 60px; border-bottom: 1px solid rgba(201,168,76,0.1); }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold); text-decoration: none; letter-spacing: 2px; }
+  nav.scrolled { background: rgba(26,24,20,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.12); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold); text-decoration: none; letter-spacing: 2px; }
   .nav-links { display: flex; gap: 40px; list-style: none; }
-  .nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light); text-decoration: none; opacity: 0.7; transition: 0.3s; }
-  .nav-links a:hover { opacity: 1; color: var(--gold); }
-
-  /* HERO */
-  #hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(50px, 8vw, 100px); font-weight: 300; line-height: 1; }
-  .hero-title em { font-style: italic; color: var(--gold-light); }
-  .hero-tagline { font-size: 14px; letter-spacing: 4px; color: rgba(255,255,255,0.4); margin-top: 20px; text-transform: uppercase; }
-
-  /* PROJECTS SECTION */
-  #projects { padding: var(--section-gap) 60px; max-width: 1400px; margin: 0 auto; }
-  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 50px; font-weight: 300; }
+  .nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-l); text-decoration: none; opacity: 0.7; transition: 0.3s; }
   
-  .projects-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 30px; }
-  .project-card { background: #221F1B; border: 1px solid rgba(201,168,76,0.1); padding: 40px; transition: 0.4s; border-radius: 4px; }
-  .project-card:hover { border-color: var(--gold); transform: translateY(-10px); }
-  .p-category { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
-  .p-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; margin-bottom: 20px; color: var(--cream); }
-  .p-detail { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.8; margin-bottom: 25px; }
-  .p-tags { display: flex; gap: 10px; flex-wrap: wrap; }
-  .p-tag { font-size: 10px; border: 1px solid rgba(201,168,76,0.3); padding: 5px 12px; border-radius: 20px; color: var(--gold-light); }
-  .p-media { width: 100%; height: 200px; background-size: cover; background-position: center; margin-bottom: 25px; border-radius: 2px; }
-
-  /* PROJECT BUILDER FORM (Admin Tool) */
-  #builder-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; overflow-y: auto; padding: 40px; }
-  .modal-content { max-width: 800px; margin: 0 auto; background: #221F1B; padding: 50px; border: 1px solid var(--gold); }
-  .form-group { margin-bottom: 25px; }
-  label { display: block; font-size: 12px; color: var(--gold); margin-bottom: 8px; text-transform: uppercase; }
-  input, textarea { width: 100%; background: #1A1814; border: 1px solid #3A3630; padding: 15px; color: white; font-family: inherit; }
-  .btn-submit { background: var(--gold); color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-  .admin-btn { position: fixed; bottom: 30px; right: 30px; background: var(--gold); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; cursor: pointer; z-index: 99; border: none; }
-
-  /* MEDIA HUB & CONTACT */
-  #media, #contact { padding: 100px 60px; text-align: center; border-top: 1px solid rgba(201,168,76,0.1); }
-  .social-icons { display: flex; justify-content: center; gap: 30px; margin: 40px 0; }
-  .social-icon { color: var(--gold); font-size: 28px; transition: 0.3s; }
-  .social-icon:hover { color: var(--gold-light); transform: translateY(-5px); }
-
-  @media (max-width: 768px) { nav { padding: 20px; } .projects-container { grid-template-columns: 1fr; } }
+  /* ── SECTIONS ── */
+  #hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(50px, 8vw, 110px); font-weight: 300; line-height: 1; }
+  #projects { padding: 120px 60px; max-width: 1300px; margin: 0 auto; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 30px; }
+  .project-card { background: #211F1C; border: 1px solid rgba(201,168,76,0.1); padding: 40px; transition: 0.4s; }
+  
+  /* ── ADMIN PANEL ── */
+  #admin-controls { display: none; background: #000; border: 1px solid var(--gold); padding: 40px; margin-top: 50px; border-radius: 8px; z-index: 50; position: relative; }
+  #login-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000; align-items: center; justify-content: center; }
+  .login-box { background: #211F1C; padding: 50px; border: 1px solid var(--gold); width: 350px; text-align: center; }
+  input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: white; }
+  .btn-gold { background: var(--gold); color: black; border: none; padding: 12px 25px; cursor: pointer; font-weight: bold; text-transform: uppercase; width: 100%; }
+  
+  #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.2; pointer-events: none; }
 </style>
 </head>
 <body>
 
+<canvas id="bg-canvas"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
 <nav id="nav">
-  <a href="#" class="nav-logo">AMIN.S</a>
+  <a href="#" class="nav-logo">AMIN SAADATI</a>
   <ul class="nav-links">
-    <li><a href="#projects">Portfolio</a></li>
-    <li><a href="#media">Media</a></li>
+    <li><a href="#projects">Work</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="javascript:void(0)" onclick="toggleAdmin()"><i class="fas fa-fingerprint"></i></a></li>
   </ul>
 </nav>
 
 <section id="hero">
-  <div class="hero-content">
-    <h1 class="hero-title">Engineering <em>Excellence</em><br>Digital Strategy</h1>
-    <p class="hero-tagline">Amin Saadati — Portfolio 2025</p>
-  </div>
+  <h1 class="hero-title">Engineering <em>Excellence</em><br>Digital Strategy</h1>
+  <p style="letter-spacing: 5px; color: var(--gold); margin-top:20px;">AMBITIOUS · CREATIVE · DRIVEN</p>
 </section>
 
 <section id="projects">
-  <div class="section-header">
-    <h2 class="section-title">Case Studies & <em>Projects</em></h2>
-  </div>
-  <div class="projects-container" id="projects-list">
-    <!-- Projects will be generated here -->
+  <div class="projects-grid" id="project-list"></div>
+  
+  <!-- ADMIN TERMINAL -->
+  <div id="admin-controls">
+    <h2 style="color:var(--gold); margin-bottom:20px; font-family:'Cormorant Garamond'">Admin Control Panel</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+      <div>
+        <label style="font-size:10px; color:var(--gold)">CONTACT EMAIL</label>
+        <input type="text" id="edit-email" placeholder="New Email">
+        <label style="font-size:10px; color:var(--gold)">SOCIAL LINKS (GH | LI | IN)</label>
+        <input type="text" id="edit-gh" placeholder="GitHub URL">
+        <input type="text" id="edit-li" placeholder="LinkedIn URL">
+        <input type="text" id="edit-in" placeholder="Instagram URL">
+      </div>
+      <div>
+        <label style="font-size:10px; color:var(--gold)">ADD NEW CASE STUDY</label>
+        <input type="text" id="new-p-title" placeholder="Title">
+        <textarea id="new-p-desc" placeholder="Description / Report"></textarea>
+        <input type="text" id="new-p-img" placeholder="Cloudinary Image URL">
+        <button class="btn-gold" id="upload-btn" style="margin-bottom:10px;">Upload Image</button>
+        <button class="btn-gold" onclick="addProject()">Add Project</button>
+      </div>
+    </div>
+    <button class="btn-gold" style="margin-top:30px; background:white;" onclick="exportFinalCode()">Generate & Download Updated Code</button>
+    <button class="btn-gold" style="margin-top:10px; background:red; color:white;" onclick="logout()">Secure Logout</button>
   </div>
 </section>
 
-<!-- Admin Button (Hidden functionality for you) -->
-<button class="admin-btn" onclick="openBuilder()" title="Add New Project">
-  <i class="fas fa-plus"></i>
-</button>
+<section id="contact" style="padding:100px 60px; text-align:center;">
+  <h2 style="font-family:'Cormorant Garamond'; font-size:45px; margin-bottom:30px;">Let's <em>Connect</em></h2>
+  <div id="social-container" style="display:flex; justify-content:center; gap:30px; margin-bottom:40px;">
+    <a href="#" id="link-gh" target="_blank" style="color:var(--gold); font-size:28px;"><i class="fab fa-github"></i></a>
+    <a href="#" id="link-li" target="_blank" style="color:var(--gold); font-size:28px;"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" id="link-in" target="_blank" style="color:var(--gold); font-size:28px;"><i class="fab fa-instagram"></i></a>
+  </div>
+  <a href="#" id="display-email" style="color:var(--gold-l); font-size:22px; text-decoration:none; font-style:italic;"></a>
+</section>
 
-<!-- Project Builder Modal -->
-<div id="builder-modal">
-  <div class="modal-content">
-    <h2 style="font-family:'Cormorant Garamond'; font-size: 32px; margin-bottom: 30px; color: var(--gold);">Professional Project Builder</h2>
-    
-    <div class="form-group">
-      <label>Project Title</label>
-      <input type="text" id="ftitle" placeholder="e.g. AI-Powered Supply Chain Optimizer">
-    </div>
-
-    <div class="form-group">
-      <label>Category / Role</label>
-      <input type="text" id="fcat" placeholder="e.g. Full-Stack Development / Research">
-    </div>
-
-    <div class="form-group">
-      <label>The Challenge (Problem Statement)</label>
-      <textarea id="fprob" rows="3" placeholder="What was the problem you needed to solve?"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>The Solution (Your Approach)</label>
-      <textarea id="fsol" rows="3" placeholder="How did you solve it? Technical details..."></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>Media Link (Image URL from Cloudinary)</label>
-      <input type="text" id="fimg" placeholder="Paste Cloudinary URL here">
-    </div>
-
-    <div class="form-group">
-      <label>Technologies (Comma separated)</label>
-      <input type="text" id="ftags" placeholder="Python, React, AWS, Docker">
-    </div>
-
-    <button class="btn-submit" onclick="generateProject()">Add Project to View</button>
-    <button class="btn-submit" style="background:transparent; color:white; border:1px solid #333;" onclick="closeBuilder()">Cancel</button>
-
-    <div id="code-output" style="margin-top: 30px; display: none;">
-      <label>Copy this JSON and save it in the code if you want it permanent:</label>
-      <textarea id="fjson" rows="5" readonly style="font-size: 10px; color: var(--gold);"></textarea>
-    </div>
+<!-- ENCRYPTED LOGIN -->
+<div id="login-modal">
+  <div class="login-box">
+    <h2 style="color:var(--gold); margin-bottom:20px; font-family:'Cormorant Garamond'">Security Access</h2>
+    <input type="password" id="admin-pass" placeholder="Enter Master Key">
+    <button class="btn-gold" onclick="validateKey()">Authorize</button>
   </div>
 </div>
 
-<section id="media">
-  <h2 class="section-title">Cloud <em>Media Center</em></h2>
-  <button id="upload_widget" class="btn-submit" style="margin-top: 20px;">Upload Files</button>
-</section>
-
-<section id="contact">
-  <h2 class="section-title">Get in <em>Touch</em></h2>
-  <div class="social-icons">
-    <a href="https://github.com/aminsaadatiit" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-    <a href="https://ir.linkedin.com/in/aminsaadati" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-    <a href="https://www.instagram.com/Amin_saadati/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-  </div>
-  <a href="mailto:amin.saadati5195@gmail.com" style="color: var(--ink-faint); text-decoration: none; font-size: 20px;">amin.saadati5195@gmail.com</a>
-</section>
-
 <script>
-  window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-  });
+  // ── SECURE DATA CORE ──
+  const SECURITY_HASH = "3c166453186d06d4e56598514101112d8a43f88f0a00c6d5952f195d52184f47"; // amin2025
+  let siteData = {
+    email: "amin.saadati5195@gmail.com",
+    links: { gh: "https://github.com/aminsaadatiit", li: "https://ir.linkedin.com/in/aminsaadati", in: "https://www.instagram.com/Amin_saadati/" },
+    projects: [
+      { title: "Strategic Development", desc: "Digital transformation and backend architecture for global enterprises.", img: "https://via.placeholder.com/600x400" }
+    ]
+  };
 
-  // Modal Logic
-  function openBuilder() { document.getElementById('builder-modal').style.display = 'block'; }
-  function closeBuilder() { document.getElementById('builder-modal').style.display = 'none'; }
-
-  // Project Generator Logic
-  function generateProject() {
-    const data = {
-      title: document.getElementById('ftitle').value,
-      cat: document.getElementById('fcat').value,
-      prob: document.getElementById('fprob').value,
-      sol: document.getElementById('fsol').value,
-      img: document.getElementById('fimg').value,
-      tags: document.getElementById('ftags').value.split(',')
-    };
-
-    const projectHTML = `
-      <div class="project-card">
-        <div class="p-media" style="background-image: url('${data.img}')"></div>
-        <div class="p-category">${data.cat}</div>
-        <h3 class="p-title">${data.title}</h3>
-        <div class="p-detail"><strong>Challenge:</strong> ${data.prob}</div>
-        <div class="p-detail"><strong>Solution:</strong> ${data.sol}</div>
-        <div class="p-tags">
-          ${data.tags.map(tag => `<span class="p-tag">${tag.trim()}</span>`).join('')}
-        </div>
-      </div>
-    `;
-
-    document.getElementById('projects-list').insertAdjacentHTML('afterbegin', projectHTML);
-    
-    // Show JSON for persistence
-    document.getElementById('code-output').style.display = 'block';
-    document.getElementById('fjson').value = JSON.stringify(data);
-    
-    alert("Project added to temporary view! Since this is a static site, you should copy the generated code to make it permanent.");
+  async function validateKey() {
+    const pass = document.getElementById('admin-pass').value;
+    const hash = await sha256(pass);
+    if(hash === SECURITY_HASH) { localStorage.setItem('session', 'active'); location.reload(); }
+    else { alert('Unauthorized Access Attempt Blocked.'); }
   }
 
-  // Cloudinary
-  const uploadWidget = cloudinary.createUploadWidget({
-    cloudName: 'YOUR_CLOUD_NAME', uploadPreset: 'YOUR_PRESET'
-  }, (error, result) => {
-    if (!error && result.event === "success") { 
-      console.log('Upload success:', result.info.secure_url);
-    }
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return Array.prototype.map.call(new Uint8Array(buf), x=>(('00'+x.toString(16)).slice(-2))).join('');
+  }
+
+  function toggleAdmin() {
+    if(localStorage.getItem('session') === 'active') {
+      const ctrl = document.getElementById('admin-controls');
+      ctrl.style.display = ctrl.style.display === 'block' ? 'none' : 'block';
+    } else { document.getElementById('login-modal').style.display = 'flex'; }
+  }
+
+  function renderSite() {
+    document.getElementById('display-email').innerText = siteData.email;
+    document.getElementById('display-email').href = "mailto:" + siteData.email;
+    document.getElementById('link-gh').href = siteData.links.gh;
+    document.getElementById('link-li').href = siteData.links.li;
+    document.getElementById('link-in').href = siteData.links.in;
+    
+    document.getElementById('project-list').innerHTML = siteData.projects.map((p, i) => `
+      <div class="project-card">
+        <img src="${p.img}" style="width:100%; margin-bottom:25px; border-radius:2px;">
+        <h3 style="font-family:'Cormorant Garamond'; font-size:32px;">${p.title}</h3>
+        <p style="opacity:0.5; font-size:14px; margin-top:15px; line-height:1.8;">${p.desc}</p>
+        ${localStorage.getItem('session') === 'active' ? `<button onclick="removeProject(${i})" style="color:red; background:none; border:none; cursor:pointer; margin-top:20px; font-size:10px;">[DELETE PROJECT]</button>` : ''}
+      </div>
+    `).join('');
+  }
+
+  function addProject() {
+    siteData.projects.push({
+      title: document.getElementById('new-p-title').value,
+      desc: document.getElementById('new-p-desc').value,
+      img: document.getElementById('new-p-img').value
+    });
+    renderSite();
+  }
+
+  function removeProject(i) { siteData.projects.splice(i, 1); renderSite(); }
+  function logout() { localStorage.removeItem('session'); location.reload(); }
+
+  function exportFinalCode() {
+    if(document.getElementById('edit-email').value) siteData.email = document.getElementById('edit-email').value;
+    if(document.getElementById('edit-gh').value) siteData.links.gh = document.getElementById('edit-gh').value;
+    if(document.getElementById('edit-li').value) siteData.links.li = document.getElementById('edit-li').value;
+    if(document.getElementById('edit-in').value) siteData.links.in = document.getElementById('edit-in').value;
+    
+    let currentCode = document.documentElement.outerHTML;
+    const dataString = `let siteData = ${JSON.stringify(siteData, null, 2)};`;
+    const finalCode = currentCode.replace(/let siteData = \{[\s\S]*?\};/, dataString);
+    
+    const blob = new Blob([finalCode], {type: "text/html"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "index.html";
+    a.click();
+    alert('Code generated! Please upload the downloaded index.html to your GitHub to save changes permanently.');
+  }
+
+  window.onload = renderSite;
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50));
+  
+  const widget = cloudinary.createUploadWidget({ cloudName: 'YOUR_CLOUD', uploadPreset: 'YOUR_PRESET' }, (err, res) => {
+    if (!err && res.event === "success") { document.getElementById('new-p-img').value = res.info.secure_url; }
   });
-  document.getElementById("upload_widget").addEventListener("click", () => uploadWidget.open());
+  document.getElementById("upload-btn").addEventListener("click", () => widget.open());
+
+  const cur = document.getElementById('cursor'), ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function loop() {
+    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+    ring.style.left = mx + 'px'; ring.style.top = my + 'px';
+    requestAnimationFrame(loop);
+  })();
 </script>
 </body>
 </html>
