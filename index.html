@@ -1,830 +1,786 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Amin Saadati — Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amin Saadati | Network & Infrastructure Portfolio</title>
+    <meta name="description" content="Passive network specialist with 4+ years experience in structured cabling, CCTV, rack installation">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+    --primary: #6c63ff;
+    --primary-dark: #5a52d5;
+    --secondary: #f50057;
+    --accent: #00bcd4;
+    --success: #4ade80;
+    --danger: #f43f5e;
+    --bg-primary: #0a0a1a;
+    --bg-secondary: #111132;
+    --bg-card: #1a1a3e;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0d0;
+    --text-muted: #6c6c8a;
+    --border: rgba(255,255,255,0.08);
+    --shadow: 0 10px 40px rgba(0,0,0,0.3);
+    --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+    --radius: 16px;
+    --radius-sm: 8px;
+    --transition: 0.3s ease;
+    --font: 'Inter', sans-serif;
+    --nav-height: 70px;
+}
 
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8D5A3;
-    --gold-pale: #F5EDD8;
-    --cream: #FAF8F3;
-    --ink: #1A1814;
-    --ink-mid: #3A3630;
-    --ink-light: #7A7468;
-    --ink-faint: #B8B2A8;
-    --white: #FFFFFF;
-    --section-gap: 140px;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
 
-  html { scroll-behavior: smooth; }
+.loader { position: fixed; inset: 0; background: var(--bg-primary); display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.5s; }
+.loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-circle { width: 50px; height: 50px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--ink);
-    color: var(--cream);
-    overflow-x: hidden;
-    cursor: none;
-  }
+.navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height); background: transparent; z-index: 1000; transition: all var(--transition); }
+.navbar.scrolled { background: rgba(10,10,26,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: var(--shadow); }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-size: 1.4rem; font-weight: 900; display: flex; align-items: center; gap: 4px; }
+.logo-bracket { color: var(--primary); }
+.logo-text { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-menu { display: flex; gap: 4px; }
+.nav-link { padding: 8px 14px; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); transition: all var(--transition); }
+.nav-link:hover, .nav-link.active { color: var(--primary); background: rgba(108,99,255,0.1); }
+.nav-actions { display: flex; gap: 10px; }
+.nav-cta { padding: 8px 20px; background: var(--gradient); border-radius: 50px; font-size: 0.8rem; font-weight: 600; color: white; transition: all var(--transition); cursor: pointer; border: none; }
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(108,99,255,0.4); }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+.hamburger span { width: 25px; height: 2px; background: var(--text-primary); transition: all var(--transition); border-radius: 2px; }
 
-  /* Custom cursor */
-  .cursor {
-    position: fixed; width: 8px; height: 8px;
-    background: var(--gold); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  }
-  .cursor-ring {
-    position: fixed; width: 36px; height: 36px;
-    border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  }
-  .cursor.hover { width: 0; height: 0; opacity: 0; }
-  .cursor-ring.hover { width: 60px; height: 60px; border-color: var(--gold); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 90px 0; position: relative; }
+.section-header { text-align: center; margin-bottom: 50px; }
+.section-tag { display: inline-block; padding: 5px 14px; background: rgba(108,99,255,0.1); color: var(--primary); border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 14px; }
+.section-title { font-size: clamp(1.6rem,4vw,2.3rem); font-weight: 900; margin-bottom: 14px; }
+.gradient-text { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.section-line { width: 50px; height: 3px; background: var(--gradient); border-radius: 2px; margin: 0 auto; }
 
-  /* Canvas background */
-  #bg-canvas {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0; opacity: 0.35;
-    pointer-events: none;
-  }
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: var(--nav-height); overflow: hidden; }
+.hero-container { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2); border-radius: 50px; font-size: 0.85rem; color: var(--primary); margin-bottom: 20px; }
+.badge-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero-name { display: block; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 900; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; margin: 8px 0; }
+.hero-title { font-size: 1.1rem; color: var(--text-secondary); }
+.hero-desc { color: var(--text-secondary); font-size: 0.95rem; max-width: 500px; margin: 20px 0; line-height: 1.8; }
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
 
-  /* Nav */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 28px 60px;
-    display: flex; justify-content: space-between; align-items: center;
-    transition: background 0.4s ease, padding 0.4s ease;
-  }
-  nav.scrolled {
-    background: rgba(26,24,20,0.92);
-    backdrop-filter: blur(12px);
-    padding: 18px 60px;
-    border-bottom: 1px solid rgba(201,168,76,0.12);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 300; letter-spacing: 3px;
-    color: var(--gold); text-decoration: none;
-    text-transform: uppercase;
-  }
-  .nav-links { display: flex; gap: 44px; list-style: none; }
-  .nav-links a {
-    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
-    color: var(--ink-faint); text-decoration: none;
-    transition: color 0.3s ease; position: relative;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -4px; left: 0;
-    width: 0; height: 1px; background: var(--gold);
-    transition: width 0.3s ease;
-  }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-links a:hover::after { width: 100%; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 50px; font-size: 0.9rem; font-weight: 600; cursor: pointer; border: none; transition: all var(--transition); }
+.btn-primary { background: var(--gradient); color: white; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(108,99,255,0.4); }
+.btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+.btn-outline:hover { background: var(--primary); color: white; }
+.btn-success { background: linear-gradient(135deg, #4ade80, #22c55e); color: white; }
+.btn-danger { background: linear-gradient(135deg, #f43f5e, #e11d48); color: white; }
+.btn-sm { padding: 8px 18px; font-size: 0.8rem; }
+.btn-full { width: 100%; justify-content: center; }
 
-  /* Sections */
-  section { position: relative; z-index: 1; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; transition: all var(--transition); }
+.card:hover { border-color: var(--primary); transform: translateY(-4px); }
 
-  /* ── HERO ── */
-  #hero {
-    height: 100vh; display: flex; align-items: center; justify-content: center;
-    text-align: center; padding: 0 40px;
-    overflow: hidden;
-  }
-  .hero-content { position: relative; }
-  .hero-eyebrow {
-    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 32px;
-    opacity: 0; transform: translateY(20px);
-    animation: fadeUp 1s ease 0.5s forwards;
-  }
-  .hero-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(64px, 10vw, 130px);
-    font-weight: 300; line-height: 0.92;
-    letter-spacing: -1px; color: var(--cream);
-    opacity: 0; transform: translateY(30px);
-    animation: fadeUp 1.2s ease 0.8s forwards;
-  }
-  .hero-name em { font-style: italic; color: var(--gold-light); }
-  .hero-line {
-    width: 0; height: 1px; background: var(--gold);
-    margin: 40px auto;
-    animation: lineGrow 1s ease 1.6s forwards;
-  }
-  .hero-tagline {
-    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--ink-faint); font-weight: 300;
-    opacity: 0; transform: translateY(20px);
-    animation: fadeUp 1s ease 1.8s forwards;
-  }
-  .hero-scroll {
-    position: absolute; bottom: 48px; left: 50%;
-    transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-    opacity: 0; animation: fadeUp 1s ease 2.4s forwards;
-  }
-  .hero-scroll span {
-    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-  .scroll-line {
-    width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollPulse 2s ease-in-out 3s infinite;
-  }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+.project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all var(--transition); }
+.project-card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+.project-image { position: relative; overflow: hidden; aspect-ratio: 16/10; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: rgba(255,255,255,0.5); }
+.project-info { padding: 20px; }
+.project-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.project-info p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; }
+.project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.project-tags span { padding: 3px 10px; background: rgba(108,99,255,0.1); color: var(--primary); border-radius: 50px; font-size: 0.7rem; font-weight: 600; }
 
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes lineGrow {
-    to { width: 80px; }
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.4; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.2); }
-  }
+.admin-panel { display: none; background: var(--bg-secondary); min-height: 100vh; padding-top: calc(var(--nav-height) + 20px); }
+.admin-panel.active { display: block; }
+.admin-tabs { display: flex; gap: 8px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+.admin-tab { padding: 10px 24px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); border-radius: 50px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all var(--transition); }
+.admin-tab.active, .admin-tab:hover { background: var(--gradient); color: white; border-color: transparent; }
+.admin-content-panel { display: none; }
+.admin-content-panel.active { display: block; }
+.admin-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 20px; }
+.admin-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+.admin-card h4 { font-size: 0.95rem; font-weight: 600; margin: 20px 0 12px; color: var(--primary); }
 
-  /* ── ABOUT ── */
-  #about {
-    padding: var(--section-gap) 60px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-    max-width: 1200px; margin: 0 auto;
-  }
-  .about-image-wrap {
-    position: relative; aspect-ratio: 3/4; max-width: 420px;
-  }
-  .about-frame {
-    position: absolute; inset: -16px 16px 16px -16px;
-    border: 1px solid rgba(201,168,76,0.25); border-radius: 2px;
-    pointer-events: none;
-  }
-  .about-placeholder {
-    width: 100%; height: 100%;
-    background: linear-gradient(145deg, #2A2720 0%, #1A1814 100%);
-    border-radius: 2px; display: flex; align-items: center; justify-content: center;
-    overflow: hidden; position: relative;
-  }
-  .about-placeholder-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 88px; font-weight: 300; color: rgba(201,168,76,0.2);
-    letter-spacing: -2px;
-  }
-  .about-decor {
-    position: absolute; bottom: -8px; right: -8px;
-    width: 64px; height: 64px;
-    border-right: 1px solid var(--gold); border-bottom: 1px solid var(--gold);
-  }
-  .about-text {}
-  .section-label {
-    font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 24px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .section-label::before {
-    content: ''; display: block; width: 32px; height: 1px;
-    background: var(--gold);
-  }
-  .about-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px; font-weight: 300; line-height: 1.1;
-    margin-bottom: 28px; color: var(--cream);
-  }
-  .about-heading em { font-style: italic; color: var(--gold-light); }
-  .about-body {
-    font-size: 15px; line-height: 1.9; color: var(--ink-faint);
-    font-weight: 300; margin-bottom: 20px;
-  }
-  .about-quote {
-    margin-top: 40px; padding-left: 24px;
-    border-left: 1px solid rgba(201,168,76,0.4);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-style: italic; color: var(--gold-light);
-    line-height: 1.5;
-  }
+.form-group-admin { margin-bottom: 16px; }
+.form-group-admin label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+.form-group-admin input, .form-group-admin textarea, .form-group-admin select { width: 100%; padding: 10px 12px; background: rgba(108,99,255,0.05); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); font-size: 0.85rem; transition: all var(--transition); outline: none; font-family: var(--font); }
+.form-group-admin input:focus, .form-group-admin textarea:focus, .form-group-admin select:focus { border-color: var(--primary); }
+.form-group-admin textarea { resize: vertical; min-height: 80px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
 
-  /* ── PROJECTS ── */
-  #projects { padding: var(--section-gap) 60px; max-width: 1300px; margin: 0 auto; }
-  .projects-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 72px;
-  }
-  .section-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 64px; font-weight: 300; line-height: 1;
-    color: var(--cream);
-  }
-  .section-heading em { font-style: italic; color: var(--gold-light); }
-  .projects-count {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 72px; font-weight: 300;
-    color: rgba(201,168,76,0.15); line-height: 1;
-  }
+.checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
+.checkbox-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(108,99,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; transition: all var(--transition); font-size: 0.82rem; }
+.checkbox-item:hover { border-color: var(--primary); }
+.checkbox-item input { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
+.checkbox-item.checked { background: rgba(108,99,255,0.1); border-color: var(--primary); }
 
-  .projects-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
-  }
-  .project-card {
-    position: relative; overflow: hidden; cursor: none;
-    background: #211F1C;
-  }
-  .project-card:first-child {
-    grid-column: 1 / -1;
-  }
-  .project-card-inner {
-    padding: 64px 56px;
-    min-height: 340px; display: flex; flex-direction: column; justify-content: flex-end;
-    position: relative; z-index: 2;
-    transition: padding 0.5s ease;
-  }
-  .project-card:first-child .project-card-inner { min-height: 440px; }
+.ai-section { background: rgba(108,99,255,0.05); border: 1px dashed var(--primary); border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.ai-section h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; color: var(--primary); }
+.ai-output { background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; min-height: 120px; margin: 12px 0; white-space: pre-wrap; font-size: 0.85rem; line-height: 1.7; color: var(--text-secondary); }
 
-  .project-bg {
-    position: absolute; inset: 0; z-index: 0;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-  .project-card:hover .project-bg { opacity: 1; }
+.export-options { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.export-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); transition: all var(--transition); }
+.export-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+.export-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-  .project-bg-1 { background: linear-gradient(135deg, #1E1A2E 0%, #2D1F3D 100%); }
-  .project-bg-2 { background: linear-gradient(135deg, #1A1E2A 0%, #1F2D3D 100%); }
-  .project-bg-3 { background: linear-gradient(135deg, #2A1A1A 0%, #3D1F1F 100%); }
-  .project-bg-4 { background: linear-gradient(135deg, #1A2A1E 0%, #1F3D25 100%); }
+.publish-center { background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(245,0,87,0.1)); border: 2px solid var(--primary); border-radius: var(--radius); padding: 30px; margin-top: 30px; }
+.publish-center h3 { font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.publish-toggle { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(108,99,255,0.05); border-radius: var(--radius-sm); margin: 10px 0; }
+.publish-toggle input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; accent-color: var(--primary); }
 
-  .project-num {
-    font-size: 10px; letter-spacing: 4px; color: var(--gold);
-    margin-bottom: 20px; font-family: 'Inter', sans-serif;
-  }
-  .project-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px; font-weight: 300; color: var(--cream);
-    margin-bottom: 12px; line-height: 1.1;
-  }
-  .project-card:first-child .project-title { font-size: 52px; }
-  .project-desc {
-    font-size: 13px; color: var(--ink-faint); line-height: 1.7;
-    max-width: 480px; margin-bottom: 28px;
-  }
-  .project-tags { display: flex; gap: 10px; flex-wrap: wrap; }
-  .project-tag {
-    font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
-    color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
-    padding: 6px 14px; border-radius: 1px;
-    transition: background 0.3s ease, border-color 0.3s ease;
-  }
-  .project-card:hover .project-tag {
-    background: rgba(201,168,76,0.08);
-    border-color: rgba(201,168,76,0.6);
-  }
-  .project-arrow {
-    position: absolute; top: 48px; right: 48px; z-index: 2;
-    width: 44px; height: 44px;
-    border: 1px solid rgba(201,168,76,0.2); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-size: 18px;
-    transform: rotate(-45deg) scale(0.8);
-    opacity: 0; transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-  .project-card:hover .project-arrow {
-    opacity: 1; transform: rotate(0deg) scale(1);
-  }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.active { display: flex; }
+.modal { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); width: 100%; max-width: 500px; padding: 36px; position: relative; }
+.modal-close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all var(--transition); }
+.modal-close:hover { background: var(--danger); border-color: var(--danger); color: white; }
+.modal h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; padding-right: 40px; }
 
-  /* ── SKILLS ── */
-  #skills {
-    padding: var(--section-gap) 60px;
-    max-width: 1200px; margin: 0 auto;
-  }
-  .skills-layout {
-    display: grid; grid-template-columns: 300px 1fr; gap: 100px;
-    align-items: start; margin-top: 72px;
-  }
-  .skills-intro {
-    position: sticky; top: 120px;
-  }
-  .skills-intro p {
-    font-size: 14px; line-height: 1.9; color: var(--ink-faint);
-    font-weight: 300; margin-top: 20px;
-  }
-  .skills-categories { display: flex; flex-direction: column; gap: 56px; }
-  .skill-category-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300; color: var(--cream);
-    margin-bottom: 28px; border-bottom: 1px solid rgba(201,168,76,0.15);
-    padding-bottom: 16px;
-  }
-  .skill-bars { display: flex; flex-direction: column; gap: 18px; }
-  .skill-item { display: grid; grid-template-columns: 160px 1fr 40px; align-items: center; gap: 20px; }
-  .skill-name { font-size: 12px; letter-spacing: 1.5px; color: var(--ink-faint); text-transform: uppercase; }
-  .skill-track {
-    height: 1px; background: rgba(255,255,255,0.08); position: relative;
-    overflow: visible;
-  }
-  .skill-fill {
-    position: absolute; top: 0; left: 0; height: 100%;
-    background: linear-gradient(to right, rgba(201,168,76,0.6), var(--gold));
-    width: 0; transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .skill-fill.animated { }
-  .skill-dot {
-    position: absolute; right: -4px; top: -3.5px;
-    width: 8px; height: 8px; background: var(--gold); border-radius: 50%;
-    opacity: 0; transition: opacity 1.4s ease;
-  }
-  .skill-fill.animated .skill-dot { opacity: 1; }
-  .skill-pct { font-size: 12px; color: var(--gold); font-weight: 300; }
+.form-status { margin-top: 14px; text-align: center; font-size: 0.85rem; font-weight: 600; }
+.form-status.success { color: #4ade80; }
+.form-status.error { color: #f43f5e; }
 
-  /* ── CONTACT ── */
-  #contact {
-    padding: var(--section-gap) 60px;
-    text-align: center; position: relative;
-    overflow: hidden;
-  }
-  .contact-bg-text {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 240px; font-weight: 300;
-    color: rgba(201,168,76,0.04); white-space: nowrap;
-    pointer-events: none; letter-spacing: -8px;
-    z-index: 0;
-  }
-  .contact-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
-  .contact-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 8vw, 100px);
-    font-weight: 300; line-height: 1; color: var(--cream);
-    margin-bottom: 32px;
-  }
-  .contact-heading em { font-style: italic; color: var(--gold-light); }
-  .contact-sub {
-    font-size: 14px; line-height: 1.9; color: var(--ink-faint);
-    font-weight: 300; margin-bottom: 56px; max-width: 500px; margin-left: auto; margin-right: auto;
-  }
-  .contact-links { display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; margin-bottom: 64px; }
-  .contact-link {
-    display: inline-flex; align-items: center; gap: 12px;
-    padding: 18px 36px;
-    border: 1px solid rgba(201,168,76,0.2);
-    color: var(--gold-light); text-decoration: none;
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-    position: relative; overflow: hidden;
-  }
-  .contact-link::before {
-    content: ''; position: absolute; inset: 0;
-    background: rgba(201,168,76,0.06);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-  .contact-link:hover::before { transform: scaleX(1); }
-  .contact-link:hover { border-color: rgba(201,168,76,0.5); color: var(--gold); }
-  .contact-link-primary {
-    background: rgba(201,168,76,0.1);
-    border-color: var(--gold);
-  }
-  .contact-divider {
-    width: 60px; height: 1px; background: rgba(201,168,76,0.2);
-    margin: 0 auto 40px;
-  }
-  .contact-email {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300; font-style: italic;
-    color: var(--ink-faint);
-  }
-  .contact-email a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
-  .contact-email a:hover { color: var(--gold-light); }
+.footer { padding: 50px 0 24px; border-top: 1px solid var(--border); }
+.footer-content { text-align: center; }
+.footer-logo { font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; }
+.footer p { color: var(--text-secondary); margin-bottom: 20px; }
+.footer-copy { color: var(--text-muted); font-size: 0.8rem; }
 
-  /* Footer */
-  footer {
-    padding: 40px 60px;
-    display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid rgba(201,168,76,0.08);
-    position: relative; z-index: 1;
-  }
-  .footer-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 300; color: var(--ink-faint);
-    letter-spacing: 2px;
-  }
-  .footer-copy {
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(122,116,104,0.5);
-  }
+.back-to-top { position: fixed; bottom: 24px; right: 24px; width: 46px; height: 46px; background: var(--gradient); border: none; border-radius: 50%; color: white; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all var(--transition); box-shadow: 0 5px 20px rgba(108,99,255,0.3); z-index: 100; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
 
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
+@media (max-width: 900px) {
+    .hero-container { grid-template-columns: 1fr; text-align: center; }
+    .field-row, .field-row-3 { grid-template-columns: 1fr; }
+    .hamburger { display: flex; }
+}
 
-  @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
-    .nav-links { gap: 24px; }
-    #about { grid-template-columns: 1fr; padding: 80px 24px; }
-    #projects, #skills, #contact { padding: 80px 24px; }
-    .skills-layout { grid-template-columns: 1fr; }
-    .skills-intro { position: static; }
+@media (max-width: 600px) {
     .projects-grid { grid-template-columns: 1fr; }
-    .project-card:first-child { grid-column: 1; }
-  }
+}
 </style>
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
+<div class="loader" id="loader">
+    <div class="loader-circle"></div>
+</div>
 
-<!-- Navigation -->
-<nav id="nav">
-  <a href="#" class="nav-logo">A · S</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="#" class="nav-logo" onclick="showMainSite()">
+            <span class="logo-bracket">&lt;</span>
+            <span class="logo-text">Amin</span>
+            <span class="logo-bracket">/&gt;</span>
+        </a>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="nav-cta" onclick="openModal('loginModal')">
+                <i class="fas fa-lock"></i> Admin
+            </button>
+        </div>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
 </nav>
 
-<!-- Hero -->
-<section id="hero">
-  <div class="hero-content">
-    <div class="hero-eyebrow">Portfolio — 2025</div>
-    <h1 class="hero-name">Amin<br><em>Saadati</em></h1>
-    <div class="hero-line"></div>
-    <div class="hero-tagline">Ambitious · Creative · Driven</div>
-  </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span>Scroll</span>
-  </div>
+<div id="mainSite">
+
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge"><span class="badge-dot"></span> Available for Projects</div>
+                <h1>
+                    <span class="hero-greeting" style="display:block;font-size:1.1rem;color:var(--text-secondary)">Hello, I'm</span>
+                    <span class="hero-name">Amin Saadati</span>
+                    <span class="hero-title" style="display:block">Network Infrastructure Specialist</span>
+                </h1>
+                <p class="hero-desc">
+                    Passive network specialist with 4+ years of experience in structured cabling,
+                    CCTV systems, rack installation, and network infrastructure design.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary"><span>View Projects</span><i class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-outline"><span>Contact Me</span><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="hero-visual" style="display:flex;align-items:center;justify-content:center">
+                <div style="width:300px;height:300px;background:var(--gradient);opacity:0.2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:6rem">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- About -->
-<section id="about">
-  <div class="about-image-wrap reveal">
-    <div class="about-placeholder">
-      <span class="about-placeholder-text">AS</span>
+<section class="section" id="projects">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">My <span class="gradient-text">Projects</span></h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Projects will be loaded here -->
+        </div>
     </div>
-    <div class="about-frame"></div>
-    <div class="about-decor"></div>
-  </div>
-  <div class="about-text">
-    <div class="section-label reveal">About me</div>
-    <h2 class="about-heading reveal reveal-delay-1">A mind shaped<br>by <em>curiosity</em></h2>
-    <p class="about-body reveal reveal-delay-2">
-      I am a driven and detail-oriented individual with a passion for building things that matter. My academic journey and projects reflect a commitment to excellence — blending rigorous thinking with creative problem-solving.
-    </p>
-    <p class="about-body reveal reveal-delay-3">
-      Whether collaborating on complex challenges or working independently, I bring focus, adaptability, and a genuine desire to contribute to meaningful work.
-    </p>
-    <blockquote class="about-quote reveal reveal-delay-4">
-      "Excellence is not a destination,<br>but a way of travelling."
-    </blockquote>
-  </div>
 </section>
 
-<!-- Projects -->
-<section id="projects">
-  <div class="projects-header">
-    <div>
-      <div class="section-label reveal">Selected Work</div>
-      <h2 class="section-heading reveal reveal-delay-1">Featured<br><em>Projects</em></h2>
-    </div>
-    <div class="projects-count reveal">04</div>
-  </div>
-  <div class="projects-grid">
-    <!-- Card 1 (full width) -->
-    <div class="project-card reveal">
-      <div class="project-bg project-bg-1"></div>
-      <div class="project-arrow">→</div>
-      <div class="project-card-inner">
-        <div class="project-num">01</div>
-        <h3 class="project-title">Project Title One</h3>
-        <p class="project-desc">A compelling description of your flagship project — what problem it solves, what you built, and why it stands out. Replace this with your actual work.</p>
-        <div class="project-tags">
-          <span class="project-tag">Research</span>
-          <span class="project-tag">Design</span>
-          <span class="project-tag">2025</span>
+<section class="section" id="contact" style="background:var(--bg-secondary)">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Get in Touch</span>
+            <h2 class="section-title">Contact <span class="gradient-text">Me</span></h2>
+            <div class="section-line"></div>
         </div>
-      </div>
-    </div>
-    <!-- Card 2 -->
-    <div class="project-card reveal reveal-delay-1">
-      <div class="project-bg project-bg-2"></div>
-      <div class="project-arrow">→</div>
-      <div class="project-card-inner">
-        <div class="project-num">02</div>
-        <h3 class="project-title">Project Title Two</h3>
-        <p class="project-desc">A short description of this project and your key contributions.</p>
-        <div class="project-tags">
-          <span class="project-tag">Engineering</span>
-          <span class="project-tag">Innovation</span>
+        <div class="card" style="max-width:600px;margin:0 auto">
+            <div style="text-align:center">
+                <p style="margin-bottom:20px"><i class="fas fa-envelope" style="font-size:2rem;color:var(--primary)"></i></p>
+                <h3>Let's Work Together!</h3>
+                <p style="color:var(--text-secondary);margin:15px 0">Ready to collaborate on your next network infrastructure project.</p>
+                <a href="mailto:amin@example.com" class="btn btn-primary" style="margin-top:20px">
+                    <i class="fas fa-paper-plane"></i> Send Email
+                </a>
+            </div>
         </div>
-      </div>
     </div>
-    <!-- Card 3 -->
-    <div class="project-card reveal reveal-delay-2">
-      <div class="project-bg project-bg-3"></div>
-      <div class="project-arrow">→</div>
-      <div class="project-card-inner">
-        <div class="project-num">03</div>
-        <h3 class="project-title">Project Title Three</h3>
-        <p class="project-desc">Highlight what made this project unique and your specific role in it.</p>
-        <div class="project-tags">
-          <span class="project-tag">Leadership</span>
-          <span class="project-tag">Analysis</span>
-        </div>
-      </div>
-    </div>
-    <!-- Card 4 -->
-    <div class="project-card reveal reveal-delay-3">
-      <div class="project-bg project-bg-4"></div>
-      <div class="project-arrow">→</div>
-      <div class="project-card-inner">
-        <div class="project-num">04</div>
-        <h3 class="project-title">Project Title Four</h3>
-        <p class="project-desc">Describe the outcome, tools used, and what you learned from this project.</p>
-        <div class="project-tags">
-          <span class="project-tag">Strategy</span>
-          <span class="project-tag">Development</span>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- Skills -->
-<section id="skills">
-  <div class="section-label reveal">Capabilities</div>
-  <h2 class="section-heading reveal reveal-delay-1">Skills &amp;<br><em>Expertise</em></h2>
-  <div class="skills-layout">
-    <div class="skills-intro reveal">
-      <p>A curated overview of the competencies I've developed through academic work, projects, and self-directed learning.</p>
-    </div>
-    <div class="skills-categories">
+</div>
 
-      <div class="reveal">
-        <div class="skill-category-title">Core Competencies</div>
-        <div class="skill-bars">
-          <div class="skill-item">
-            <span class="skill-name">Critical Thinking</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="92"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">92%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Research</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="88"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">88%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Problem Solving</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="90"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">90%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Communication</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="85"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">85%</span>
-          </div>
+<div class="admin-panel" id="adminPanel">
+    <div class="container">
+        <div style="text-align:center;margin-bottom:30px">
+            <h2 style="font-size:1.6rem;font-weight:900">⚙️ Admin Dashboard</h2>
+            <p style="color:var(--text-secondary)">Manage your portfolio and projects</p>
+            <button class="btn btn-outline btn-sm" onclick="showMainSite()" style="margin-top:15px">
+                <i class="fas fa-arrow-left"></i> Back to Site
+            </button>
         </div>
-      </div>
 
-      <div class="reveal reveal-delay-1">
-        <div class="skill-category-title">Technical Skills</div>
-        <div class="skill-bars">
-          <div class="skill-item">
-            <span class="skill-name">Skill One</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="86"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">86%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Skill Two</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="78"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">78%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Skill Three</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="82"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">82%</span>
-          </div>
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-admin-tab="projectBuilder">🛠 Project Builder</button>
+            <button class="admin-tab" data-admin-tab="publishCenter">🚀 Publish Center</button>
+            <button class="admin-tab" data-admin-tab="manageProjects">📁 Manage Projects</button>
         </div>
-      </div>
 
-      <div class="reveal reveal-delay-2">
-        <div class="skill-category-title">Languages</div>
-        <div class="skill-bars">
-          <div class="skill-item">
-            <span class="skill-name">Language 1</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="100"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">Native</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Language 2</span>
-            <div class="skill-track"><div class="skill-fill" data-pct="80"><div class="skill-dot"></div></div></div>
-            <span class="skill-pct">Fluent</span>
-          </div>
+        <div class="admin-content-panel active" id="projectBuilder">
+            <div class="admin-card">
+                <h3><i class="fas fa-plus-circle"></i> Create New Project</h3>
+                <form id="projectForm">
+                    <div class="field-row">
+                        <div class="form-group-admin">
+                            <label>Project Title *</label>
+                            <input type="text" id="pTitle" required placeholder="e.g. Office Network Installation">
+                        </div>
+                        <div class="form-group-admin">
+                            <label>Client Name</label>
+                            <input type="text" id="pClient" placeholder="e.g. ABC Company">
+                        </div>
+                    </div>
+
+                    <div class="form-group-admin">
+                        <label>Short Description *</label>
+                        <textarea id="pShortDesc" rows="2" required placeholder="Brief overview of the project..."></textarea>
+                    </div>
+
+                    <div class="form-group-admin">
+                        <label>Detailed Description</label>
+                        <textarea id="pDetailDesc" rows="4" placeholder="Full project details, challenges, solutions..."></textarea>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="form-group-admin">
+                            <label>Location</label>
+                            <input type="text" id="pLocation" placeholder="e.g. Tehran, Iran">
+                        </div>
+                        <div class="form-group-admin">
+                            <label>Project Date</label>
+                            <input type="date" id="pDate">
+                        </div>
+                    </div>
+
+                    <div class="form-group-admin">
+                        <label>Project Categories (select multiple)</label>
+                        <div class="checkbox-grid" id="categoryCheckboxes">
+                            <label class="checkbox-item"><input type="checkbox" value="cabling"> Structured Cabling</label>
+                            <label class="checkbox-item"><input type="checkbox" value="cctv"> CCTV / Surveillance</label>
+                            <label class="checkbox-item"><input type="checkbox" value="rack"> Rack Installation</label>
+                            <label class="checkbox-item"><input type="checkbox" value="fiber"> Fiber Optic</label>
+                            <label class="checkbox-item"><input type="checkbox" value="security"> Security Systems</label>
+                            <label class="checkbox-item"><input type="checkbox" value="wireless"> Wireless Network</label>
+                            <label class="checkbox-item"><input type="checkbox" value="ai"> AI Integration</label>
+                        </div>
+                    </div>
+
+                    <div class="ai-section">
+                        <h4><i class="fas fa-robot"></i> AI Project Description Generator (Offline)</h4>
+                        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:10px">Click to auto-generate a professional project description.</p>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="generateAIDescription()">
+                            <i class="fas fa-magic"></i> Generate Description
+                        </button>
+                        <div class="ai-output" id="aiOutput">AI-generated content will appear here...</div>
+                        <button type="button" class="btn btn-outline btn-sm" onclick="copyAIOutput()">
+                            <i class="fas fa-copy"></i> Copy to Clipboard
+                        </button>
+                    </div>
+
+                    <h4>Export Format</h4>
+                    <div class="export-options">
+                        <button type="button" class="export-btn active" data-format="html" onclick="selectExport(this)">
+                            <i class="fas fa-globe"></i> Website (HTML)
+                        </button>
+                        <button type="button" class="export-btn" data-format="txt" onclick="selectExport(this)">
+                            <i class="fas fa-file-alt"></i> TXT
+                        </button>
+                    </div>
+
+                    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+                        <button type="button" class="btn btn-primary" onclick="saveProject()">
+                            <i class="fas fa-save"></i> Save Project
+                        </button>
+                        <button type="button" class="btn btn-outline" onclick="exportProject()">
+                            <i class="fas fa-download"></i> Export Project
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
 
-    </div>
-  </div>
-</section>
+        <div class="admin-content-panel" id="publishCenter">
+            <div class="admin-card">
+                <div class="publish-center">
+                    <h3><i class="fas fa-rocket"></i> Auto Publish Center</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:30px">Configure automatic publishing to GitHub Pages and LinkedIn</p>
 
-<!-- Contact -->
-<section id="contact">
-  <div class="contact-bg-text">CONTACT</div>
-  <div class="contact-inner">
-    <div class="section-label reveal" style="justify-content:center">Let's Connect</div>
-    <h2 class="contact-heading reveal reveal-delay-1">Get in<br><em>Touch</em></h2>
-    <p class="contact-sub reveal reveal-delay-2">
-      Whether you're a university admissions team or a future employer — I'd love to hear from you and explore how I can contribute.
-    </p>
-    <div class="contact-links reveal reveal-delay-3">
-      <a href="mailto:amin@example.com" class="contact-link contact-link-primary">
-        ✉ Send a message
-      </a>
-      <a href="#" class="contact-link">↓ Download CV</a>
-      <a href="#" class="contact-link">in LinkedIn</a>
-    </div>
-    <div class="contact-divider reveal reveal-delay-4"></div>
-    <div class="contact-email reveal reveal-delay-4">
-      <a href="mailto:amin@example.com">amin@example.com</a>
-    </div>
-  </div>
-</section>
+                    <h4><i class="fab fa-github"></i> GitHub Settings</h4>
+                    <div class="form-group-admin">
+                        <label>GitHub Personal Access Token</label>
+                        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxx">
+                        <small style="color:var(--text-muted);font-size:0.75rem">Get token from: Settings → Developer settings → Personal access tokens</small>
+                    </div>
 
-<!-- Footer -->
-<footer>
-  <div class="footer-name">Amin Saadati</div>
-  <div class="footer-copy">© 2025 — All rights reserved</div>
+                    <div class="form-group-admin">
+                        <label>Repository (username/repo)</label>
+                        <input type="text" id="ghRepo" placeholder="yourusername/portfolio">
+                    </div>
+
+                    <div class="form-group-admin">
+                        <label>Branch</label>
+                        <input type="text" id="ghBranch" value="main">
+                    </div>
+
+                    <button class="btn btn-success" onclick="saveGitHubSettings()">
+                        <i class="fas fa-save"></i> Save GitHub Settings
+                    </button>
+
+                    <hr style="margin:30px 0;border:none;border-top:1px solid var(--border)">
+
+                    <h4><i class="fab fa-linkedin"></i> LinkedIn Share</h4>
+                    <div class="publish-toggle">
+                        <input type="checkbox" id="autoLinkedin" checked>
+                        <label for="autoLinkedin" style="cursor:pointer">Auto-open LinkedIn share window when publishing</label>
+                    </div>
+
+                    <hr style="margin:30px 0;border:none;border-top:1px solid var(--border)">
+
+                    <h4><i class="fas fa-bolt"></i> Auto Mode</h4>
+                    <div class="publish-toggle">
+                        <input type="checkbox" id="autoModeToggle">
+                        <label for="autoModeToggle" style="cursor:pointer">Enable Auto Publish when saving project</label>
+                    </div>
+
+                    <div style="margin-top:30px">
+                        <button class="btn btn-primary btn-full" onclick="publishLastProject()">
+                            <i class="fas fa-rocket"></i> Publish Last Project Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-content-panel" id="manageProjects">
+            <div class="admin-card">
+                <h3><i class="fas fa-folder-open"></i> Saved Projects</h3>
+                <div id="savedProjectsList">
+                    <p style="color:var(--text-muted)">No saved projects yet. Create one using the Project Builder tab.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="loginModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal('loginModal')"><i class="fas fa-times"></i></button>
+        <h2>🔐 Admin Login</h2>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group-admin">
+                <label>Username</label>
+                <input type="text" id="loginUser" required>
+            </div>
+            <div class="form-group-admin">
+                <label>Password</label>
+                <input type="password" id="loginPass" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" style="margin-top:10px">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+            <div class="form-status" id="loginStatus"></div>
+        </form>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">Amin</span>
+                <span class="logo-bracket">/&gt;</span>
+            </div>
+            <p>Built with ❤️ and clean code</p>
+            <div class="footer-copy">&copy; 2024 Amin Saadati. All rights reserved.</div>
+        </div>
+    </div>
 </footer>
 
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
 <script>
-// ── Animated canvas background ──
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-let W, H, particles = [];
+let isLoggedIn = false;
+let savedProjects = JSON.parse(localStorage.getItem('projects') || '[]');
+let selectedExportFormat = 'html';
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'admin123';
 
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', () => { resize(); initParticles(); });
-
-class Particle {
-  constructor() { this.reset(true); }
-  reset(random = false) {
-    this.x = Math.random() * W;
-    this.y = random ? Math.random() * H : H + 20;
-    this.size = Math.random() * 1.2 + 0.3;
-    this.speedX = (Math.random() - 0.5) * 0.3;
-    this.speedY = -(Math.random() * 0.4 + 0.15);
-    this.opacity = Math.random() * 0.6 + 0.2;
-    this.life = 0;
-    this.maxLife = Math.random() * 300 + 200;
-  }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    this.life++;
-    const lifePct = this.life / this.maxLife;
-    this.currentOpacity = this.opacity * (lifePct < 0.2 ? lifePct / 0.2 : lifePct > 0.8 ? 1 - (lifePct - 0.8) / 0.2 : 1);
-    if (this.life >= this.maxLife) this.reset();
-  }
-  draw() {
-    ctx.save();
-    ctx.globalAlpha = this.currentOpacity;
-    ctx.fillStyle = '#C9A84C';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-}
-
-// Lines
-class Line {
-  constructor() { this.reset(true); }
-  reset(random = false) {
-    this.x = Math.random() * W;
-    this.y = random ? Math.random() * H : H + 50;
-    this.len = Math.random() * 60 + 20;
-    this.speed = Math.random() * 0.6 + 0.3;
-    this.opacity = Math.random() * 0.2 + 0.05;
-    this.life = 0; this.maxLife = Math.random() * 400 + 300;
-  }
-  update() {
-    this.y -= this.speed; this.life++;
-    const lp = this.life / this.maxLife;
-    this.cur = this.opacity * (lp < 0.15 ? lp / 0.15 : lp > 0.85 ? 1 - (lp - 0.85) / 0.15 : 1);
-    if (this.life >= this.maxLife) this.reset();
-  }
-  draw() {
-    ctx.save(); ctx.globalAlpha = this.cur;
-    const grad = ctx.createLinearGradient(this.x, this.y, this.x, this.y + this.len);
-    grad.addColorStop(0, 'rgba(201,168,76,0)');
-    grad.addColorStop(0.5, 'rgba(201,168,76,0.8)');
-    grad.addColorStop(1, 'rgba(201,168,76,0)');
-    ctx.strokeStyle = grad; ctx.lineWidth = 0.5;
-    ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(this.x, this.y + this.len);
-    ctx.stroke(); ctx.restore();
-  }
-}
-
-let lines = [];
-function initParticles() {
-  particles = Array.from({length: 80}, () => new Particle());
-  lines = Array.from({length: 20}, () => new Line());
-}
-initParticles();
-
-function drawGrid() {
-  ctx.save(); ctx.globalAlpha = 0.03; ctx.strokeStyle = '#C9A84C'; ctx.lineWidth = 0.5;
-  const step = 80;
-  for (let x = 0; x < W; x += step) {
-    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
-  }
-  for (let y = 0; y < H; y += step) {
-    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-  }
-  ctx.restore();
-}
-
-function animate() {
-  ctx.clearRect(0, 0, W, H);
-  drawGrid();
-  particles.forEach(p => { p.update(); p.draw(); });
-  lines.forEach(l => { l.update(); l.draw(); });
-  requestAnimationFrame(animate);
-}
-animate();
-
-// ── Custom cursor ──
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function cursorLoop() {
-  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(cursorLoop);
-})();
-document.querySelectorAll('a, button, .project-card, .contact-link').forEach(el => {
-  el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
-  el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+        loadProjects();
+        loadGitHubSettings();
+    }, 800);
 });
 
-// ── Nav scroll ──
-const nav = document.getElementById('nav');
+const navbar = document.getElementById('navbar');
+const backToTop = document.getElementById('backToTop');
+
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
+    const s = window.scrollY;
+    navbar.classList.toggle('scrolled', s > 50);
+    backToTop.classList.toggle('visible', s > 500);
 });
 
-// ── Scroll reveal ──
-const reveals = document.querySelectorAll('.reveal');
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-reveals.forEach(el => revealObs.observe(el));
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// ── Skill bar animation ──
-const skillFills = document.querySelectorAll('.skill-fill');
-const skillObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const pct = e.target.dataset.pct;
-      e.target.style.width = pct + '%';
-      e.target.classList.add('animated');
-      skillObs.unobserve(e.target);
+function openModal(id) { document.getElementById(id).classList.add('active'); }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+function handleLogin(e) {
+    e.preventDefault();
+    const u = document.getElementById('loginUser').value;
+    const p = document.getElementById('loginPass').value;
+    const st = document.getElementById('loginStatus');
+    if (u === ADMIN_USER && p === ADMIN_PASS) {
+        isLoggedIn = true;
+        closeModal('loginModal');
+        showAdminPanel();
+        st.textContent = '';
+    } else {
+        st.textContent = '❌ Invalid credentials';
+        st.className = 'form-status error';
     }
-  });
-}, { threshold: 0.4 });
-skillFills.forEach(el => skillObs.observe(el));
+}
 
-// ── Parallax hero ──
-window.addEventListener('scroll', () => {
-  const hero = document.getElementById('hero');
-  const s = window.scrollY;
-  hero.style.transform = `translateY(${s * 0.3}px)`;
+function showAdminPanel() {
+    document.getElementById('mainSite').style.display = 'none';
+    document.getElementById('adminPanel').classList.add('active');
+    window.scrollTo(0, 0);
+    renderSavedProjects();
+}
+
+function showMainSite() {
+    document.getElementById('mainSite').style.display = 'block';
+    document.getElementById('adminPanel').classList.remove('active');
+    window.scrollTo(0, 0);
+}
+
+document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.admin-content-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(tab.dataset.adminTab).classList.add('active');
+    });
 });
+
+document.querySelectorAll('.checkbox-item input').forEach(cb => {
+    cb.addEventListener('change', function() {
+        this.closest('.checkbox-item').classList.toggle('checked', this.checked);
+    });
+});
+
+function generateAIDescription() {
+    const title = document.getElementById('pTitle').value || 'Untitled Project';
+    const client = document.getElementById('pClient').value || 'a valued client';
+    const desc = document.getElementById('pShortDesc').value || '';
+    const location = document.getElementById('pLocation').value || '';
+    const cats = [];
+    document.querySelectorAll('#categoryCheckboxes input:checked').forEach(c => {
+        cats.push(c.parentElement.textContent.trim());
+    });
+
+    let output = `📋 PROJECT REPORT: ${title.toUpperCase()}\n${'═'.repeat(50)}\n\n`;
+    output += `🏢 Client: ${client}\n`;
+    if (location) output += `📍 Location: ${location}\n`;
+    if (cats.length) output += `🏷️ Categories: ${cats.join(', ')}\n`;
+    output += `\n📝 PROJECT OVERVIEW\n${'-'.repeat(30)}\n`;
+    output += desc ? desc + '\n' : `This project involved the design and implementation of a comprehensive ${cats.join(' & ').toLowerCase() || 'network infrastructure'} solution for ${client}.\n`;
+    output += `\n✅ DELIVERED BY\n${'-'.repeat(30)}\n`;
+    output += `Amin Saadati | Network Infrastructure Specialist\n`;
+    output += `Portfolio: This project showcases expertise in ${cats.slice(0, 3).join(', ').toLowerCase() || 'passive networking'}.\n`;
+    output += `\n${'═'.repeat(50)}\n`;
+
+    document.getElementById('aiOutput').textContent = output;
+}
+
+function copyAIOutput() {
+    const text = document.getElementById('aiOutput').textContent;
+    navigator.clipboard.writeText(text).then(() => alert('✅ Copied to clipboard!'));
+}
+
+function selectExport(btn) {
+    btn.closest('.export-options').querySelectorAll('.export-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedExportFormat = btn.dataset.format;
+}
+
+function exportProject() {
+    const content = document.getElementById('aiOutput').textContent;
+    if (!content || content.includes('will appear')) {
+        alert('Please generate AI description first!');
+        return;
+    }
+    const title = document.getElementById('pTitle').value || 'project';
+    const format = document.querySelector('#projectBuilder .export-btn.active')?.dataset.format || 'txt';
+
+    if (format === 'txt') {
+        downloadFile(content, title + '.txt', 'text/plain');
+    } else if (format === 'html') {
+        const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title><style>body{font-family:Arial;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;color:#333}h1{color:#6c63ff}pre{white-space:pre-wrap;background:#f5f5f5;padding:20px;border-radius:8px}</style></head><body><h1>${title}</h1><pre>${content}</pre></body></html>`;
+        downloadFile(html, title + '.html', 'text/html');
+    }
+}
+
+function downloadFile(content, filename, type) {
+    const blob = new Blob([content], { type: type + ';charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function saveProject() {
+    const title = document.getElementById('pTitle').value;
+    if (!title) {
+        alert('Please enter a project title!');
+        return;
+    }
+
+    const cats = [];
+    document.querySelectorAll('#categoryCheckboxes input:checked').forEach(c => cats.push(c.value));
+
+    const project = {
+        id: Date.now(),
+        title,
+        client: document.getElementById('pClient').value,
+        date: document.getElementById('pDate').value,
+        location: document.getElementById('pLocation').value,
+        shortDesc: document.getElementById('pShortDesc').value,
+        detailDesc: document.getElementById('pDetailDesc').value,
+        categories: cats,
+        aiDesc: document.getElementById('aiOutput').textContent,
+        slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+    };
+
+    savedProjects.push(project);
+    localStorage.setItem('projects', JSON.stringify(savedProjects));
+    addProjectToGrid(project);
+    alert('✅ Project saved!');
+    renderSavedProjects();
+
+    if (document.getElementById('autoModeToggle').checked) {
+        autoPublish(project);
+    }
+}
+
+function addProjectToGrid(p) {
+    const colors = ['#667eea,#764ba2', '#f093fb,#f5576c', '#4facfe,#00f2fe', '#43e97b,#38f9d7', '#a18cd1,#fbc2eb', '#fa709a,#fee140'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const icons = {
+        cabling: 'fa-ethernet',
+        cctv: 'fa-video',
+        rack: 'fa-server',
+        fiber: 'fa-project-diagram',
+        security: 'fa-shield-alt',
+        wireless: 'fa-wifi',
+        ai: 'fa-robot'
+    };
+    const icon = icons[p.categories[0]] || 'fa-network-wired';
+
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
+        <div class="project-image" style="background:linear-gradient(135deg,${color})">
+            <i class="fas ${icon}"></i>
+        </div>
+        <div class="project-info">
+            <div class="project-tags">${p.categories.map(c => '<span>' + c + '</span>').join('')}</div>
+            <h3>${p.title}</h3>
+            <p>${p.shortDesc}</p>
+        </div>
+    `;
+    document.getElementById('projectsGrid').appendChild(card);
+}
+
+function loadProjects() {
+    savedProjects.forEach(p => addProjectToGrid(p));
+}
+
+function renderSavedProjects() {
+    const list = document.getElementById('savedProjectsList');
+    if (!savedProjects.length) {
+        list.innerHTML = '<p style="color:var(--text-muted)">No saved projects yet.</p>';
+        return;
+    }
+    list.innerHTML = savedProjects.map(p => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px">
+            <div>
+                <strong>${p.title}</strong><br>
+                <span style="font-size:0.8rem;color:var(--text-muted)">${p.date || 'No date'} | ${p.categories.join(', ')}</span>
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="deleteProject(${p.id})">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    `).join('');
+}
+
+function deleteProject(id) {
+    if (!confirm('Delete this project?')) return;
+    savedProjects = savedProjects.filter(p => p.id !== id);
+    localStorage.setItem('projects', JSON.stringify(savedProjects));
+    renderSavedProjects();
+    document.getElementById('projectsGrid').innerHTML = '';
+    loadProjects();
+}
+
+function saveGitHubSettings() {
+    const data = {
+        token: document.getElementById('ghToken').value,
+        repo: document.getElementById('ghRepo').value,
+        branch: document.getElementById('ghBranch').value
+    };
+    localStorage.setItem('githubSettings', JSON.stringify(data));
+    alert('✅ GitHub settings saved!');
+}
+
+function loadGitHubSettings() {
+    const data = JSON.parse(localStorage.getItem('githubSettings') || '{}');
+    if (data.token) document.getElementById('ghToken').value = data.token;
+    if (data.repo) document.getElementById('ghRepo').value = data.repo;
+    if (data.branch) document.getElementById('ghBranch').value = data.branch;
+}
+
+async function publishLastProject() {
+    const project = savedProjects[savedProjects.length - 1];
+    if (!project) {
+        alert('No project to publish');
+        return;
+    }
+    await autoPublish(project);
+}
+
+async function autoPublish(project) {
+    const settings = JSON.parse(localStorage.getItem('githubSettings') || '{}');
+    if (!settings.token || !settings.repo) {
+        alert('⚠️ Please configure GitHub settings first');
+        return;
+    }
+
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="${project.title}">
+    <meta property="og:description" content="${project.shortDesc}">
+    <meta property="og:type" content="website">
+    <title>${project.title} | Amin Saadati</title>
+    <style>
+        body{font-family:Arial;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;background:#0a0a1a;color:#fff}
+        h1{color:#6c63ff;font-size:2rem}
+        .meta{color:#888;margin:10px 0}
+        pre{white-space:pre-wrap;background:#1a1a3e;padding:20px;border-radius:12px;border:1px solid #333}
+    </style>
+</head>
+<body>
+    <h1>${project.title}</h1>
+    <div class="meta">📍 ${project.location || 'N/A'} | 📅 ${project.date || 'N/A'}</div>
+    <p>${project.shortDesc}</p>
+    ${project.detailDesc ? '<p>' + project.detailDesc + '</p>' : ''}
+    <pre>${project.aiDesc || 'No AI description generated.'}</pre>
+</body>
+</html>`;
+
+    const encoded = btoa(unescape(encodeURIComponent(htmlContent)));
+
+    try {
+        await fetch(`https://api.github.com/repos/${settings.repo}/contents/projects/${project.slug}/index.html`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${settings.token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: `Add project: ${project.title}`,
+                content: encoded,
+                branch: settings.branch || 'main'
+            })
+        });
+
+        alert('🚀 Project published to GitHub! Deploying...');
+
+        if (document.getElementById('autoLinkedin').checked) {
+            const repoName = settings.repo.split('/')[1];
+            const username = settings.repo.split('/')[0];
+            const projectURL = `https://${username}.github.io/${repoName}/projects/${project.slug}`;
+            const text = encodeURIComponent(`🚀 New Project: ${project.title}\n\n${project.shortDesc}\n\n`);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(projectURL)}&summary=${text}`, '_blank');
+        }
+
+    } catch (error) {
+        alert('❌ Error publishing: ' + error.message);
+    }
+}
 </script>
+
 </body>
 </html>
