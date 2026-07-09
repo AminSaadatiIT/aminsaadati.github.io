@@ -17,6 +17,7 @@
   --success: #10b981;
   --danger: #ef4444;
   --warning: #f59e0b;
+  --info: #3b82f6;
   --bg-primary: #0a0a1a;
   --bg-secondary: #111132;
   --bg-card: #1a1a3e;
@@ -33,7 +34,11 @@
   --nav-height: 70px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   font-family: var(--font);
@@ -71,9 +76,13 @@ ul { list-style: none; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-/* ===== TOAST NOTIFICATION SYSTEM ===== */
+/* ===== TOAST ===== */
 .toast-container {
   position: fixed;
   top: 20px;
@@ -87,7 +96,6 @@ ul { list-style: none; }
   width: 90%;
   max-width: 450px;
 }
-
 .toast {
   padding: 16px 24px;
   border-radius: 12px;
@@ -102,26 +110,11 @@ ul { list-style: none; }
   pointer-events: auto;
   min-width: 300px;
 }
-
 .toast.hiding { animation: toastSlideOut 0.4s ease forwards; }
-
-.toast-success {
-  background: linear-gradient(135deg, #10b981, #059669);
-  border-left: 4px solid #065f46;
-}
-.toast-error {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  border-left: 4px solid #991b1b;
-}
-.toast-info {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  border-left: 4px solid #1e40af;
-}
-.toast-warning {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  border-left: 4px solid #92400e;
-}
-
+.toast-success { background: linear-gradient(135deg, #10b981, #059669); border-left: 4px solid #065f46; }
+.toast-error { background: linear-gradient(135deg, #ef4444, #dc2626); border-left: 4px solid #991b1b; }
+.toast-info { background: linear-gradient(135deg, #3b82f6, #2563eb); border-left: 4px solid #1e40af; }
+.toast-warning { background: linear-gradient(135deg, #f59e0b, #d97706); border-left: 4px solid #92400e; }
 .toast i { font-size: 1.3rem; flex-shrink: 0; }
 .toast-content { flex: 1; }
 .toast-close {
@@ -137,7 +130,6 @@ ul { list-style: none; }
   justify-content: center;
   font-size: .8rem;
 }
-
 @keyframes toastSlideIn {
   from { transform: translateY(-100px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
@@ -147,9 +139,12 @@ ul { list-style: none; }
   to { transform: translateY(-100px); opacity: 0; }
 }
 
+/* ===== NAVBAR ===== */
 .navbar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: var(--nav-height);
   background: transparent;
   z-index: 1000;
@@ -245,6 +240,7 @@ ul { list-style: none; }
   .nav-menu.open { right: 0; }
 }
 
+/* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -276,6 +272,7 @@ ul { list-style: none; }
 .btn-full { width: 100%; justify-content: center; }
 .btn:disabled { opacity: .7; cursor: wait; }
 
+/* ===== SECTIONS ===== */
 .section { padding: 90px 0; }
 .section-header { text-align: center; margin-bottom: 50px; }
 .section-tag {
@@ -306,6 +303,7 @@ ul { list-style: none; }
   margin: 0 auto;
 }
 
+/* ===== HERO ===== */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -395,7 +393,12 @@ ul { list-style: none; }
 .stat-plus { font-size: 1.3rem; color: var(--primary); font-weight: 700; }
 .stat-label { display: block; font-size: .8rem; color: var(--text-muted); margin-top: 4px; }
 .stat-divider { width: 1px; height: 36px; background: var(--border); }
-.hero-image-wrapper { position: relative; width: 350px; height: 350px; margin: 0 auto; }
+.hero-image-wrapper {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  margin: 0 auto;
+}
 .hero-image-bg {
   position: absolute;
   inset: -10px;
@@ -445,7 +448,13 @@ ul { list-style: none; }
   50% { transform: translateY(-10px); }
 }
 
-.about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 50px; align-items: center; }
+/* ===== ABOUT ===== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 50px;
+  align-items: center;
+}
 .about-img-wrapper { position: relative; max-width: 380px; margin: 0 auto; }
 .about-img-placeholder {
   width: 100%;
@@ -474,7 +483,12 @@ ul { list-style: none; }
 .exp-number { display: block; font-size: 1.8rem; font-weight: 900; }
 .about-content h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 14px; }
 .about-content p { color: var(--text-secondary); margin-bottom: 14px; line-height: 1.8; }
-.about-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+.about-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 28px 0;
+}
 .about-info-item {
   display: flex;
   align-items: center;
@@ -509,7 +523,7 @@ ul { list-style: none; }
   transform: translateY(-3px);
 }
 
-/* ===== SKILLS - NEW CIRCULAR DESIGN ===== */
+/* ===== SKILLS ===== */
 .skills-bg { background: var(--bg-secondary); }
 .skills-tabs {
   display: flex;
@@ -537,7 +551,6 @@ ul { list-style: none; }
 }
 .skills-panel { display: none; }
 .skills-panel.active { display: block; }
-
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -550,27 +563,12 @@ ul { list-style: none; }
   border-radius: var(--radius);
   transition: all var(--transition);
   text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.skill-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(108,99,255,0.1) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity var(--transition);
 }
 .skill-card:hover {
   transform: translateY(-8px);
   border-color: var(--primary);
   box-shadow: 0 15px 40px rgba(108,99,255,0.2);
 }
-.skill-card:hover::before { opacity: 1; }
-
 .circular-progress {
   position: relative;
   width: 110px;
@@ -624,7 +622,7 @@ ul { list-style: none; }
   margin-bottom: 10px;
 }
 
-/* ===== PROJECTS - CARDS STYLE ===== */
+/* ===== PROJECTS ===== */
 .projects-filter {
   display: flex;
   justify-content: center;
@@ -677,6 +675,8 @@ ul { list-style: none; }
   justify-content: center;
   font-size: 3.5rem;
   color: rgba(255,255,255,0.5);
+  background-size: cover;
+  background-position: center;
 }
 .project-info { padding: 20px; }
 .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
@@ -707,7 +707,23 @@ ul { list-style: none; }
   background: var(--primary);
   color: white;
 }
+</style>
+</head>
+<body>
 
+<div class="loader" id="loader"><div class="loader-circle"></div></div>
+<div class="toast-container" id="toastContainer"></div>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c63ff"/>
+      <stop offset="100%" style="stop-color:#f50057"/>
+    </linearGradient>
+  </defs>
+</svg>
+<style>
+/* ===== EXPERIENCE ===== */
 .experience-bg { background: var(--bg-secondary); }
 .timeline {
   position: relative;
@@ -767,6 +783,7 @@ ul { list-style: none; }
   font-weight: 600;
 }
 
+/* ===== TESTIMONIALS ===== */
 .testimonials-slider { max-width: 850px; margin: 0 auto; overflow: hidden; }
 .testimonial-track { display: flex; transition: transform .5s ease; }
 .testimonial-card {
@@ -792,7 +809,12 @@ ul { list-style: none; }
   margin-bottom: 20px;
   font-style: italic;
 }
-.testimonial-author { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 .author-avatar {
   width: 46px;
   height: 46px;
@@ -836,8 +858,14 @@ ul { list-style: none; }
 }
 .test-dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
 
+/* ===== CONTACT ===== */
 .contact-bg { background: var(--bg-secondary); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: start; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 50px;
+  align-items: start;
+}
 .contact-icon {
   width: 46px;
   height: 46px;
@@ -871,7 +899,6 @@ ul { list-style: none; }
 }
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); }
 
-/* ===== SELECT FIX ===== */
 .form-group select, .form-group-admin select {
   appearance: none;
   -webkit-appearance: none;
@@ -888,6 +915,7 @@ ul { list-style: none; }
   padding: 10px !important;
 }
 
+/* ===== ADMIN PANEL ===== */
 .admin-panel {
   display: none;
   background: var(--bg-secondary);
@@ -961,9 +989,7 @@ ul { list-style: none; }
   color: var(--text-secondary);
   margin-bottom: 6px;
 }
-.form-group-admin input,
-.form-group-admin textarea,
-.form-group-admin select {
+.form-group-admin input, .form-group-admin textarea, .form-group-admin select {
   width: 100%;
   padding: 10px 12px;
   background: rgba(108,99,255,0.05);
@@ -975,9 +1001,7 @@ ul { list-style: none; }
   font-family: var(--font);
   transition: all var(--transition);
 }
-.form-group-admin input:focus,
-.form-group-admin textarea:focus,
-.form-group-admin select:focus { border-color: var(--primary); }
+.form-group-admin input:focus, .form-group-admin textarea:focus, .form-group-admin select:focus { border-color: var(--primary); }
 .form-group-admin textarea { resize: vertical; min-height: 60px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
@@ -1022,6 +1046,66 @@ ul { list-style: none; }
   color: var(--text-secondary);
 }
 
+/* ===== MEDIA UPLOAD ===== */
+.media-upload {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  transition: all var(--transition);
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.media-upload:hover { border-color: var(--primary); background: rgba(108,99,255,0.03); }
+.media-upload input { display: none; }
+.media-upload-label { color: var(--text-secondary); font-size: .85rem; }
+.media-upload-label i { display: block; font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+.media-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.media-preview-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.media-preview-item img, .media-preview-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.media-preview-item .remove-media {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(239,68,68,0.9);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .7rem;
+}
+.media-preview-item .media-type {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  padding: 2px 6px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  border-radius: 4px;
+  font-size: .65rem;
+}
+
+/* ===== PUBLISH ===== */
 .publish-center {
   background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(245,0,87,0.1));
   border: 2px solid var(--primary);
@@ -1045,6 +1129,73 @@ ul { list-style: none; }
   accent-color: var(--primary);
 }
 
+.platform-select {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+.platform-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(108,99,255,0.05);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.platform-option:hover { border-color: var(--primary); }
+.platform-option.selected { border-color: var(--primary); background: rgba(108,99,255,0.1); }
+.platform-option input { width: 20px; height: 20px; accent-color: var(--primary); }
+.platform-option .platform-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: white;
+}
+.platform-github { background: #333; }
+.platform-linkedin { background: #0077b5; }
+.platform-instagram { background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045); }
+.platform-info { flex: 1; }
+.platform-info h4 { font-size: .95rem; font-weight: 700; margin-bottom: 2px; }
+.platform-info p { font-size: .75rem; color: var(--text-muted); margin: 0; }
+
+.generated-content {
+  background: rgba(108,99,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 15px 0;
+}
+.generated-content h4 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .95rem;
+}
+.generated-text {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-size: .85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  max-height: 250px;
+  overflow-y: auto;
+  margin: 10px 0;
+}
+.generated-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ===== MODALS ===== */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1088,6 +1239,7 @@ ul { list-style: none; }
 .modal-close:hover { background: var(--danger); color: white; }
 .modal h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; }
 
+.publish-modal .modal { max-width: 700px; }
 .project-view-modal .modal { max-width: 800px; }
 .project-view-content h1 {
   font-size: 1.8rem;
@@ -1105,7 +1257,12 @@ ul { list-style: none; }
   margin-bottom: 16px;
 }
 .project-view-meta span { display: flex; align-items: center; gap: 6px; }
-.project-view-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.project-view-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
 .project-view-tags span {
   padding: 4px 12px;
   background: rgba(108,99,255,0.1);
@@ -1136,7 +1293,62 @@ ul { list-style: none; }
   white-space: pre-wrap;
   font-family: var(--font);
 }
+.project-media-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.project-media-gallery img, .project-media-gallery video {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
 
+/* ===== SECURITY ===== */
+.security-info {
+  background: rgba(59,130,246,0.1);
+  border: 1px solid var(--info);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin: 15px 0;
+  font-size: .85rem;
+  color: var(--text-secondary);
+}
+.security-info i { color: var(--info); margin-right: 6px; }
+.password-strength {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  margin: 8px 0;
+  overflow: hidden;
+}
+.password-strength-fill {
+  height: 100%;
+  transition: all .3s ease;
+  border-radius: 3px;
+}
+.strength-weak { background: #ef4444; width: 25%; }
+.strength-fair { background: #f59e0b; width: 50%; }
+.strength-good { background: #3b82f6; width: 75%; }
+.strength-strong { background: #10b981; width: 100%; }
+.password-rules {
+  font-size: .75rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+.password-rules div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 3px 0;
+}
+.password-rules div.met { color: #10b981; }
+.password-rules div.met i { color: #10b981; }
+
+/* ===== FOOTER ===== */
 .footer { padding: 50px 0 24px; border-top: 1px solid var(--border); }
 .footer-content { text-align: center; }
 .footer-logo { font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; }
@@ -1191,21 +1403,7 @@ ul { list-style: none; }
   .toast { min-width: 250px; font-size: .8rem; padding: 12px 16px; }
 }
 </style>
-</head>
-<body>
 
-<div class="loader" id="loader"><div class="loader-circle"></div></div>
-
-<div class="toast-container" id="toastContainer"></div>
-
-<svg width="0" height="0" style="position:absolute">
-  <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6c63ff"/>
-      <stop offset="100%" style="stop-color:#f50057"/>
-    </linearGradient>
-  </defs>
-</svg>
 <nav class="navbar" id="navbar">
   <div class="nav-container">
     <div class="nav-logo" onclick="showMainSite()">
@@ -1304,7 +1502,6 @@ ul { list-style: none; }
     </div>
   </div>
 </section>
-
 <section class="section" id="about">
   <div class="container">
     <div class="section-header" data-aos>
@@ -1356,11 +1553,7 @@ ul { list-style: none; }
             </div>
           </div>
         </div>
-        <div id="socialLinks">
-          <a href="https://linkedin.com/in/aminsaadati" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://t.me/AminJR" target="_blank" class="social-link"><i class="fab fa-telegram-plane"></i></a>
-          <a href="https://instagram.com/13amin.82" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-        </div>
+        <div id="socialLinksAbout"></div>
       </div>
     </div>
   </div>
@@ -1474,11 +1667,7 @@ ul { list-style: none; }
             </div>
           </div>
         </div>
-        <div>
-          <a href="https://t.me/AminJR" target="_blank" class="social-link"><i class="fab fa-telegram-plane"></i></a>
-          <a href="https://instagram.com/13amin.82" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://linkedin.com/in/aminsaadati" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-        </div>
+        <div id="socialLinksContact"></div>
       </div>
       <form class="contact-form" id="contactForm" data-aos>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
@@ -1523,13 +1712,12 @@ ul { list-style: none; }
       <button class="admin-tab" data-admin-tab="experienceManager">💼 Experience</button>
       <button class="admin-tab" data-admin-tab="testimonialManager">💬 Testimonials</button>
       <button class="admin-tab" data-admin-tab="publishCenter">🚀 Publish</button>
+      <button class="admin-tab" data-admin-tab="securityCenter">🔐 Security</button>
     </div>
 
     <div class="admin-content-panel active" id="siteSettings">
       <div class="admin-card">
-        <div class="admin-card-header">
-          <h3><i class="fas fa-home"></i> Hero Section</h3>
-        </div>
+        <div class="admin-card-header"><h3><i class="fas fa-home"></i> Hero Section</h3></div>
         <div class="field-row">
           <div class="form-group-admin"><label>Badge Text</label><input type="text" id="aBadge" value="Available for Projects"></div>
           <div class="form-group-admin"><label>Greeting</label><input type="text" id="aGreeting" value="Hello, I'm"></div>
@@ -1553,30 +1741,27 @@ ul { list-style: none; }
         </div>
       </div>
       <div class="admin-card">
-        <div class="admin-card-header">
-          <h3><i class="fas fa-user"></i> About Section</h3>
-        </div>
+        <div class="admin-card-header"><h3><i class="fas fa-user"></i> About Section</h3></div>
         <div class="form-group-admin"><label>Experience Badge</label><input type="text" id="aExpBadge" value="4+"></div>
         <div class="form-group-admin"><label>About Title</label><input type="text" id="aAboutTitle" value="Passive Network Specialist & AI Enthusiast"></div>
         <div class="form-group-admin"><label>About Paragraph 1</label><textarea id="aAbout1">I'm Amin Saadati, a network infrastructure specialist with 4+ years of hands-on experience in passive networking.</textarea></div>
         <div class="form-group-admin"><label>About Paragraph 2</label><textarea id="aAbout2">I combine my networking expertise with a passion for AI technology to deliver smart, future-ready solutions.</textarea></div>
       </div>
       <div class="admin-card">
-        <div class="admin-card-header">
-          <h3><i class="fas fa-address-card"></i> Contact Information</h3>
-        </div>
+        <div class="admin-card-header"><h3><i class="fas fa-address-card"></i> Contact & Social Links</h3></div>
         <div class="field-row">
           <div class="form-group-admin"><label>Email</label><input type="email" id="aEmail" value="amin.saadati5195@gmail.com"></div>
           <div class="form-group-admin"><label>Phone</label><input type="tel" id="aPhone" value="+98-XXX-XXX-XXXX"></div>
         </div>
         <div class="field-row">
           <div class="form-group-admin"><label>Location</label><input type="text" id="aLocation" value="Iran"></div>
-          <div class="form-group-admin"><label>LinkedIn URL</label><input type="url" id="aLinkedIn"></div>
+          <div class="form-group-admin"><label>LinkedIn URL (full link)</label><input type="url" id="aLinkedIn" placeholder="https://linkedin.com/in/yourprofile"></div>
         </div>
         <div class="field-row">
-          <div class="form-group-admin"><label>Telegram</label><input type="text" id="aTelegram" value="AminJR"></div>
-          <div class="form-group-admin"><label>Instagram</label><input type="text" id="aInstagram" value="13amin.82"></div>
+          <div class="form-group-admin"><label>Telegram Username (without @)</label><input type="text" id="aTelegram" value="AminJR"></div>
+          <div class="form-group-admin"><label>Instagram Username (without @)</label><input type="text" id="aInstagram" value="13amin.82"></div>
         </div>
+        <div class="form-group-admin"><label>GitHub Username</label><input type="text" id="aGithub" value="AminSaadatiIT"></div>
       </div>
       <button class="btn btn-primary" onclick="saveSiteSettings()">
         <i class="fas fa-save"></i> Save All Settings
@@ -1646,6 +1831,32 @@ ul { list-style: none; }
             <label class="checkbox-item"><input type="checkbox" value="ai"> AI Integration</label>
           </div>
         </div>
+        
+        <h4>📸 Media Upload</h4>
+        <div class="field-row">
+          <div>
+            <label class="media-upload" for="pImages">
+              <input type="file" id="pImages" accept="image/*" multiple onchange="handleMediaUpload(event, 'image')">
+              <div class="media-upload-label">
+                <i class="fas fa-image"></i>
+                Click to upload images<br>
+                <small>(Multiple allowed)</small>
+              </div>
+            </label>
+          </div>
+          <div>
+            <label class="media-upload" for="pVideos">
+              <input type="file" id="pVideos" accept="video/*" multiple onchange="handleMediaUpload(event, 'video')">
+              <div class="media-upload-label">
+                <i class="fas fa-video"></i>
+                Click to upload videos<br>
+                <small>(Max 25MB each)</small>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="media-preview" id="mediaPreview"></div>
+        
         <div class="ai-section">
           <h4 style="color:var(--primary)"><i class="fas fa-robot"></i> AI Description Generator</h4>
           <button class="btn btn-primary btn-sm" onclick="generateAI()">
@@ -1657,18 +1868,14 @@ ul { list-style: none; }
           <button class="btn btn-primary" onclick="saveProject()" id="saveProjectBtn">
             <i class="fas fa-save"></i> Save Project
           </button>
-          <button class="btn btn-outline" onclick="exportProject()">
-            <i class="fas fa-download"></i> Export TXT
+          <button class="btn btn-success" onclick="openPublishModal()" id="publishBtn">
+            <i class="fas fa-rocket"></i> Save & Publish
           </button>
         </div>
       </div>
       <div class="admin-card">
-        <div class="admin-card-header">
-          <h3><i class="fas fa-folder-open"></i> Saved Projects</h3>
-        </div>
-        <div id="savedProjectsList">
-          <p style="color:var(--text-muted)">No projects yet.</p>
-        </div>
+        <div class="admin-card-header"><h3><i class="fas fa-folder-open"></i> Saved Projects</h3></div>
+        <div id="savedProjectsList"><p style="color:var(--text-muted)">No projects yet.</p></div>
       </div>
     </div>
 
@@ -1677,12 +1884,8 @@ ul { list-style: none; }
         <div class="admin-card-header">
           <h3><i class="fas fa-briefcase"></i> Manage Experience</h3>
           <div style="display:flex;gap:8px">
-            <button class="btn btn-outline btn-sm" onclick="addExperience()">
-              <i class="fas fa-plus"></i> Add
-            </button>
-            <button class="btn btn-primary btn-sm" onclick="saveExperience()">
-              <i class="fas fa-save"></i> Save
-            </button>
+            <button class="btn btn-outline btn-sm" onclick="addExperience()"><i class="fas fa-plus"></i> Add</button>
+            <button class="btn btn-primary btn-sm" onclick="saveExperience()"><i class="fas fa-save"></i> Save</button>
           </div>
         </div>
         <div id="experienceAdmin"></div>
@@ -1694,12 +1897,8 @@ ul { list-style: none; }
         <div class="admin-card-header">
           <h3><i class="fas fa-quote-left"></i> Manage Testimonials</h3>
           <div style="display:flex;gap:8px">
-            <button class="btn btn-outline btn-sm" onclick="addTestimonial()">
-              <i class="fas fa-plus"></i> Add
-            </button>
-            <button class="btn btn-primary btn-sm" onclick="saveTestimonials()">
-              <i class="fas fa-save"></i> Save
-            </button>
+            <button class="btn btn-outline btn-sm" onclick="addTestimonial()"><i class="fas fa-plus"></i> Add</button>
+            <button class="btn btn-primary btn-sm" onclick="saveTestimonials()"><i class="fas fa-save"></i> Save</button>
           </div>
         </div>
         <div id="testimonialAdmin"></div>
@@ -1716,27 +1915,59 @@ ul { list-style: none; }
             <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxx">
           </div>
           <div class="field-row">
-            <div class="form-group-admin"><label>Repository (user/repo)</label><input type="text" id="ghRepo" value="AminSaadatiIT/aminsaadati.github.io"></div>
+            <div class="form-group-admin"><label>Repository</label><input type="text" id="ghRepo" value="AminSaadatiIT/aminsaadati.github.io"></div>
             <div class="form-group-admin"><label>Branch</label><input type="text" id="ghBranch" value="main"></div>
           </div>
-          <button class="btn btn-success" onclick="saveGHSettings()">
-            <i class="fas fa-save"></i> Save GitHub
-          </button>
+          <button class="btn btn-success" onclick="saveGHSettings()"><i class="fas fa-save"></i> Save GitHub</button>
           <hr style="margin:30px 0;border:none;border-top:1px solid var(--border)">
-          <h4><i class="fab fa-linkedin"></i> LinkedIn Share</h4>
+          <h4><i class="fas fa-bolt"></i> Auto Publish Mode</h4>
+          <p style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Check platforms to auto-publish when saving a project:</p>
           <div class="publish-toggle">
-            <input type="checkbox" id="autoLinkedin" checked>
-            <label>Auto-open LinkedIn share</label>
+            <input type="checkbox" id="autoGithub" checked>
+            <label><i class="fab fa-github" style="color:#333;background:white;padding:4px;border-radius:4px;margin-right:6px"></i> GitHub (auto push)</label>
           </div>
-          <h4><i class="fas fa-bolt"></i> Auto Mode</h4>
           <div class="publish-toggle">
-            <input type="checkbox" id="autoMode">
-            <label>Auto publish on save</label>
+            <input type="checkbox" id="autoLinkedin">
+            <label><i class="fab fa-linkedin" style="color:#0077b5;margin-right:6px"></i> LinkedIn (open share)</label>
           </div>
-          <button class="btn btn-primary btn-full" onclick="publishLastProject()" style="margin-top:20px">
-            <i class="fas fa-rocket"></i> Publish Last Project
-          </button>
+          <div class="publish-toggle">
+            <input type="checkbox" id="autoInstagram">
+            <label><i class="fab fa-instagram" style="color:#E1306C;margin-right:6px"></i> Instagram (copy text)</label>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="admin-content-panel" id="securityCenter">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3><i class="fas fa-shield-alt"></i> Change Admin Password</h3></div>
+        <div class="security-info">
+          <i class="fas fa-info-circle"></i>
+          After changing password, the new password will be pushed to GitHub and applied everywhere. Old password will no longer work.
+        </div>
+        <div class="form-group-admin">
+          <label>Current Password</label>
+          <input type="password" id="currentPass" placeholder="Enter current password">
+        </div>
+        <div class="form-group-admin">
+          <label>New Password</label>
+          <input type="password" id="newPass" placeholder="Enter new password" oninput="checkPasswordStrength()">
+          <div class="password-strength"><div class="password-strength-fill" id="passStrengthBar"></div></div>
+          <div class="password-rules" id="passRules">
+            <div id="rule-length"><i class="fas fa-times-circle"></i> At least 8 characters</div>
+            <div id="rule-upper"><i class="fas fa-times-circle"></i> At least one uppercase letter</div>
+            <div id="rule-lower"><i class="fas fa-times-circle"></i> At least one lowercase letter</div>
+            <div id="rule-number"><i class="fas fa-times-circle"></i> At least one number</div>
+            <div id="rule-special"><i class="fas fa-times-circle"></i> At least one special character (!@#$...)</div>
+          </div>
+        </div>
+        <div class="form-group-admin">
+          <label>Confirm New Password</label>
+          <input type="password" id="confirmPass" placeholder="Re-enter new password">
+        </div>
+        <button class="btn btn-primary" onclick="changePassword()">
+          <i class="fas fa-key"></i> Change Password
+        </button>
       </div>
     </div>
   </div>
@@ -1785,6 +2016,44 @@ ul { list-style: none; }
   </div>
 </div>
 
+<div class="modal-overlay publish-modal" id="publishModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('publishModal')"><i class="fas fa-times"></i></button>
+    <h2>🚀 Publish Project</h2>
+    <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:20px">Select where you want to publish this project:</p>
+    <div class="platform-select">
+      <label class="platform-option" onclick="togglePlatform(this)">
+        <input type="checkbox" id="pubGithub" checked>
+        <div class="platform-icon platform-github"><i class="fab fa-github"></i></div>
+        <div class="platform-info">
+          <h4>GitHub</h4>
+          <p>Auto push to repository & deploy</p>
+        </div>
+      </label>
+      <label class="platform-option" onclick="togglePlatform(this)">
+        <input type="checkbox" id="pubLinkedin">
+        <div class="platform-icon platform-linkedin"><i class="fab fa-linkedin"></i></div>
+        <div class="platform-info">
+          <h4>LinkedIn</h4>
+          <p>Generate professional post & open share</p>
+        </div>
+      </label>
+      <label class="platform-option" onclick="togglePlatform(this)">
+        <input type="checkbox" id="pubInstagram">
+        <div class="platform-icon platform-instagram"><i class="fab fa-instagram"></i></div>
+        <div class="platform-info">
+          <h4>Instagram</h4>
+          <p>Generate caption & open Instagram</p>
+        </div>
+      </label>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="executePublish()">
+      <i class="fas fa-rocket"></i> Publish to Selected Platforms
+    </button>
+    <div id="publishResults"></div>
+  </div>
+</div>
+
 <div class="modal-overlay project-view-modal" id="projectViewModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('projectViewModal')"><i class="fas fa-times"></i></button>
@@ -1812,9 +2081,15 @@ ul { list-style: none; }
 const EMAILJS_SERVICE_ID = 'service_fxlbn1g';
 const EMAILJS_TEMPLATE_ID = 'template_sfyxk64';
 const EMAILJS_PUBLIC_KEY = '31zGYw_tcofS-hk8I';
+
+// ⚠️ IMPORTANT: This is a SHA-256 hash of the password
+// Default: admin123 (hash below)
+// This will be updated when password changes
+const ADMIN_PASSWORD_HASH = 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f';
+const ADMIN_USER = 'admin';
+
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
-// ===== TOAST SYSTEM =====
 function showToast(message, type = 'success', duration = 4000) {
   const container = document.getElementById('toastContainer');
   const toast = document.createElement('div');
@@ -1834,6 +2109,14 @@ function showToast(message, type = 'success', duration = 4000) {
   }, duration);
 }
 
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+</script>
+<script>
 const DEFAULT_SKILLS = {
   passive: [
     { name: 'Structured Cabling', percent: 95, icon: 'fa-ethernet' },
@@ -1863,9 +2146,9 @@ const DEFAULT_EXPERIENCE = [
 ];
 
 const DEFAULT_TESTIMONIALS = [
-  { text: '"Amin delivered exceptional quality work. His attention to detail in cabling was impressive."', name: 'Ali M.', role: 'CEO, Alpha Co.', stars: 5 },
-  { text: '"Professional, punctual, and highly skilled. Our server room setup was flawless."', name: 'Sara R.', role: 'CTO, Beta Startup', stars: 5 },
-  { text: '"Outstanding network design. He understood our needs perfectly."', name: 'Reza K.', role: 'IT Manager', stars: 5 }
+  { text: '"Amin delivered exceptional quality work."', name: 'Ali M.', role: 'CEO, Alpha Co.', stars: 5 },
+  { text: '"Professional, punctual, and highly skilled."', name: 'Sara R.', role: 'CTO, Beta Startup', stars: 5 },
+  { text: '"Outstanding network design."', name: 'Reza K.', role: 'IT Manager', stars: 5 }
 ];
 
 let isLoggedIn = false;
@@ -1874,10 +2157,11 @@ let siteData = JSON.parse(localStorage.getItem('siteData') || 'null');
 let skillsData = JSON.parse(localStorage.getItem('skillsData') || 'null') || DEFAULT_SKILLS;
 let expData = JSON.parse(localStorage.getItem('expData') || 'null') || DEFAULT_EXPERIENCE;
 let testData = JSON.parse(localStorage.getItem('testData') || 'null') || DEFAULT_TESTIMONIALS;
-const ADMIN_USER = 'admin';
-const ADMIN_PASS = 'admin123';
 let currentSlide = 0;
 let editingProjectId = null;
+let currentMediaFiles = [];
+let loginAttempts = parseInt(sessionStorage.getItem('loginAttempts') || '0');
+let lockoutUntil = parseInt(sessionStorage.getItem('lockoutUntil') || '0');
 
 window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('hidden'), 800);
@@ -1890,6 +2174,7 @@ window.addEventListener('load', () => {
   loadGHSettings();
   initTypewriter();
   initScrollAnimations();
+  renderSocialLinks();
 });
 
 function createParticles() {
@@ -1935,7 +2220,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click
 function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-// Reset hire form when opening
 function openHireModal() {
   document.getElementById('hireForm').reset();
   const btn = document.getElementById('hireSubmitBtn');
@@ -1944,11 +2228,24 @@ function openHireModal() {
   openModal('hireModal');
 }
 
-function handleLogin(e) {
+async function handleLogin(e) {
   e.preventDefault();
+  
+  if (Date.now() < lockoutUntil) {
+    const seconds = Math.ceil((lockoutUntil - Date.now()) / 1000);
+    showToast(`Too many attempts. Try again in ${seconds}s`, 'error');
+    return;
+  }
+  
   const u = document.getElementById('loginUser').value;
   const p = document.getElementById('loginPass').value;
-  if (u === ADMIN_USER && p === ADMIN_PASS) {
+  const hashedInput = await sha256(p);
+  
+  const currentHash = localStorage.getItem('adminPassHash') || ADMIN_PASSWORD_HASH;
+  
+  if (u === ADMIN_USER && hashedInput === currentHash) {
+    loginAttempts = 0;
+    sessionStorage.setItem('loginAttempts', '0');
     isLoggedIn = true;
     closeModal('loginModal');
     showAdmin();
@@ -1956,7 +2253,16 @@ function handleLogin(e) {
     document.getElementById('loginUser').value = '';
     document.getElementById('loginPass').value = '';
   } else {
-    showToast('Invalid username or password', 'error');
+    loginAttempts++;
+    sessionStorage.setItem('loginAttempts', loginAttempts.toString());
+    if (loginAttempts >= 5) {
+      lockoutUntil = Date.now() + 30000;
+      sessionStorage.setItem('lockoutUntil', lockoutUntil.toString());
+      showToast('Too many failed attempts. Locked for 30 seconds', 'error');
+      loginAttempts = 0;
+    } else {
+      showToast(`Invalid credentials. ${5 - loginAttempts} attempts left`, 'error');
+    }
   }
 }
 
@@ -2001,6 +2307,25 @@ function initTypewriter() {
   type();
 }
 
+function renderSocialLinks() {
+  const s = siteData || {};
+  const telegram = s.telegram || 'AminJR';
+  const instagram = s.instagram || '13amin.82';
+  const linkedin = s.linkedin || '';
+  const github = s.github || 'AminSaadatiIT';
+  
+  let html = '';
+  if (linkedin) html += `<a href="${linkedin}" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>`;
+  if (telegram) html += `<a href="https://t.me/${telegram}" target="_blank" class="social-link"><i class="fab fa-telegram-plane"></i></a>`;
+  if (instagram) html += `<a href="https://instagram.com/${instagram}" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>`;
+  if (github) html += `<a href="https://github.com/${github}" target="_blank" class="social-link"><i class="fab fa-github"></i></a>`;
+  
+  const aboutSocials = document.getElementById('socialLinksAbout');
+  const contactSocials = document.getElementById('socialLinksContact');
+  if (aboutSocials) aboutSocials.innerHTML = html;
+  if (contactSocials) contactSocials.innerHTML = html;
+}
+
 function applySiteData() {
   if (!siteData) return;
   const s = siteData;
@@ -2023,6 +2348,7 @@ function applySiteData() {
   if (s.phone) { document.getElementById('infoPhone').textContent = s.phone; document.getElementById('contactPhoneLink').textContent = s.phone; }
   if (s.location) { document.getElementById('infoLocation').textContent = s.location; document.getElementById('contactLocationText').textContent = s.location; }
   animateCounters();
+  renderSocialLinks();
 }
 
 function loadAdminData() {
@@ -2050,6 +2376,7 @@ function loadAdminData() {
   document.getElementById('aLinkedIn').value = s.linkedin || '';
   document.getElementById('aTelegram').value = s.telegram || 'AminJR';
   document.getElementById('aInstagram').value = s.instagram || '13amin.82';
+  document.getElementById('aGithub').value = s.github || 'AminSaadatiIT';
 }
 
 function saveSiteSettings() {
@@ -2075,7 +2402,8 @@ function saveSiteSettings() {
     location: document.getElementById('aLocation').value,
     linkedin: document.getElementById('aLinkedIn').value,
     telegram: document.getElementById('aTelegram').value,
-    instagram: document.getElementById('aInstagram').value
+    instagram: document.getElementById('aInstagram').value,
+    github: document.getElementById('aGithub').value
   };
   localStorage.setItem('siteData', JSON.stringify(siteData));
   applySiteData();
@@ -2095,7 +2423,6 @@ function animateCounters() {
   });
 }
 
-// ===== NEW CIRCULAR SKILLS RENDER =====
 function renderSkills() {
   ['passive', 'active-net', 'security'].forEach(cat => {
     const key = cat === 'active-net' ? 'active' : cat;
@@ -2103,8 +2430,7 @@ function renderSkills() {
     if (!container) return;
     const skills = skillsData[key] || [];
     container.innerHTML = skills.map(s => {
-      const circumference = 314;
-      const offset = circumference - (s.percent / 100) * circumference;
+      const offset = 314 - (s.percent / 100) * 314;
       return `
         <div class="skill-card">
           <div class="skill-icon-small"><i class="fas ${s.icon}"></i></div>
@@ -2152,32 +2478,21 @@ function renderSkillsAdmin() {
   });
 }
 
-function addSkillField(cat) {
-  skillsData[cat].push({ name: 'New Skill', percent: 70, icon: 'fa-tools' });
-  renderSkillsAdmin();
-  showToast('Skill added. Click Save to apply.', 'info', 2500);
-}
-function removeSkill(cat, idx) {
-  skillsData[cat].splice(idx, 1);
-  renderSkillsAdmin();
-}
+function addSkillField(cat) { skillsData[cat].push({ name: 'New Skill', percent: 70, icon: 'fa-tools' }); renderSkillsAdmin(); }
+function removeSkill(cat, idx) { skillsData[cat].splice(idx, 1); renderSkillsAdmin(); }
 function saveSkills() {
   ['passive', 'active', 'security'].forEach(cat => {
     const nameInpts = document.querySelectorAll(`[data-cat="${cat}"][data-field="name"]`);
     const perInpts = document.querySelectorAll(`[data-cat="${cat}"][data-field="percent"]`);
     const skills = [];
     for (let i = 0; i < nameInpts.length; i++) {
-      skills.push({
-        name: nameInpts[i].value,
-        percent: parseInt(perInpts[i].value) || 0,
-        icon: skillsData[cat][i]?.icon || 'fa-tools'
-      });
+      skills.push({ name: nameInpts[i].value, percent: parseInt(perInpts[i].value) || 0, icon: skillsData[cat][i]?.icon || 'fa-tools' });
     }
     skillsData[cat] = skills;
   });
   localStorage.setItem('skillsData', JSON.stringify(skillsData));
   renderSkills();
-  showToast('Skills saved successfully! ✨', 'success');
+  showToast('Skills saved! ✨', 'success');
 }
 
 function renderTimeline() {
@@ -2207,23 +2522,18 @@ function renderExpAdmin() {
       </div>
       <div class="field-row">
         <div class="form-group-admin"><label>Company</label><input value="${e.company}" data-exp="${i}" data-field="company"></div>
-        <div class="form-group-admin"><label>Tags (comma)</label><input value="${e.tags.join(',')}" data-exp="${i}" data-field="tags"></div>
+        <div class="form-group-admin"><label>Tags</label><input value="${e.tags.join(',')}" data-exp="${i}" data-field="tags"></div>
       </div>
       <div class="form-group-admin"><label>Description</label><textarea data-exp="${i}" data-field="desc">${e.desc}</textarea></div>
     </div>
   `).join('');
 }
 
-function addExperience() {
-  expData.push({ date: '2024', title: 'New Position', company: 'Company', desc: 'Description...', tags: ['Tag'] });
-  renderExpAdmin();
-  showToast('Experience added. Click Save to apply.', 'info', 2500);
-}
+function addExperience() { expData.push({ date: '2024', title: 'New Position', company: 'Company', desc: 'Description...', tags: ['Tag'] }); renderExpAdmin(); }
 function removeExp(i) { expData.splice(i, 1); renderExpAdmin(); }
 function saveExperience() {
   expData = [];
-  const items = document.querySelectorAll('#experienceAdmin > div');
-  items.forEach(item => {
+  document.querySelectorAll('#experienceAdmin > div').forEach(item => {
     expData.push({
       date: item.querySelector(`[data-field="date"]`).value,
       title: item.querySelector(`[data-field="title"]`).value,
@@ -2234,7 +2544,7 @@ function saveExperience() {
   });
   localStorage.setItem('expData', JSON.stringify(expData));
   renderTimeline();
-  showToast('Experience saved successfully! ✨', 'success');
+  showToast('Experience saved! ✨', 'success');
 }
 
 function renderTestimonials() {
@@ -2280,16 +2590,11 @@ function renderTestAdmin() {
   `).join('');
 }
 
-function addTestimonial() {
-  testData.push({ text: '"Great work!"', name: 'New Client', role: 'Company', stars: 5 });
-  renderTestAdmin();
-  showToast('Testimonial added. Click Save to apply.', 'info', 2500);
-}
+function addTestimonial() { testData.push({ text: '"Great work!"', name: 'New Client', role: 'Company', stars: 5 }); renderTestAdmin(); }
 function removeTest(i) { testData.splice(i, 1); renderTestAdmin(); }
 function saveTestimonials() {
   testData = [];
-  const items = document.querySelectorAll('#testimonialAdmin > div');
-  items.forEach(item => {
+  document.querySelectorAll('#testimonialAdmin > div').forEach(item => {
     testData.push({
       name: item.querySelector(`[data-field="name"]`).value,
       role: item.querySelector(`[data-field="role"]`).value,
@@ -2299,8 +2604,33 @@ function saveTestimonials() {
   });
   localStorage.setItem('testData', JSON.stringify(testData));
   renderTestimonials();
-  showToast('Testimonials saved successfully! ✨', 'success');
+  showToast('Testimonials saved! ✨', 'success');
 }
+
+function handleMediaUpload(e, type) {
+  const files = Array.from(e.target.files);
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      currentMediaFiles.push({ type, name: file.name, data: ev.target.result });
+      renderMediaPreview();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderMediaPreview() {
+  const preview = document.getElementById('mediaPreview');
+  preview.innerHTML = currentMediaFiles.map((m, i) => `
+    <div class="media-preview-item">
+      ${m.type === 'image' ? `<img src="${m.data}">` : `<video src="${m.data}"></video>`}
+      <span class="media-type">${m.type === 'image' ? '📷' : '🎥'}</span>
+      <button class="remove-media" onclick="removeMedia(${i})"><i class="fas fa-times"></i></button>
+    </div>
+  `).join('');
+}
+
+function removeMedia(i) { currentMediaFiles.splice(i, 1); renderMediaPreview(); }
 
 function loadProjects() {
   document.getElementById('projectsGrid').innerHTML = '';
@@ -2312,13 +2642,14 @@ function addProjectCard(p) {
   const color = colors[p.id % colors.length];
   const icons = { cabling: 'fa-ethernet', cctv: 'fa-video', rack: 'fa-server', fiber: 'fa-project-diagram', security: 'fa-shield-alt', wireless: 'fa-wifi', ai: 'fa-robot' };
   const icon = icons[p.categories?.[0]] || 'fa-network-wired';
+  const firstImage = p.media?.find(m => m.type === 'image');
   const card = document.createElement('div');
   card.className = 'project-card';
   card.dataset.category = p.categories?.join(',') || '';
   card.onclick = () => viewProject(p.id);
   card.innerHTML = `
-    <div class="project-image" style="background:linear-gradient(135deg,${color})">
-      <i class="fas ${icon}"></i>
+    <div class="project-image" ${firstImage ? `style="background-image:url('${firstImage.data}');background-size:cover"` : `style="background:linear-gradient(135deg,${color})"`}>
+      ${!firstImage ? `<i class="fas ${icon}"></i>` : ''}
     </div>
     <div class="project-info">
       <div class="project-tags">${(p.categories || []).map(c => '<span>' + c + '</span>').join('')}</div>
@@ -2334,6 +2665,8 @@ function viewProject(id) {
   const p = savedProjects.find(x => x.id === id);
   if (!p) return;
   const content = document.getElementById('projectViewContent');
+  const images = p.media?.filter(m => m.type === 'image') || [];
+  const videos = p.media?.filter(m => m.type === 'video') || [];
   content.innerHTML = `
     <h1>${p.title}</h1>
     <div class="project-view-meta">
@@ -2344,6 +2677,8 @@ function viewProject(id) {
     ${p.categories?.length ? `<div class="project-view-tags">${p.categories.map(c => '<span>' + c + '</span>').join('')}</div>` : ''}
     ${p.shortDesc ? `<div class="project-view-section"><h4><i class="fas fa-info-circle"></i> Overview</h4><p>${p.shortDesc}</p></div>` : ''}
     ${p.detailDesc ? `<div class="project-view-section"><h4><i class="fas fa-file-alt"></i> Details</h4><p>${p.detailDesc}</p></div>` : ''}
+    ${images.length ? `<div class="project-view-section"><h4><i class="fas fa-images"></i> Images (${images.length})</h4><div class="project-media-gallery">${images.map(img => `<img src="${img.data}" onclick="window.open('${img.data}','_blank')">`).join('')}</div></div>` : ''}
+    ${videos.length ? `<div class="project-view-section"><h4><i class="fas fa-video"></i> Videos (${videos.length})</h4><div class="project-media-gallery">${videos.map(v => `<video src="${v.data}" controls></video>`).join('')}</div></div>` : ''}
     ${p.aiDesc && !p.aiDesc.includes('will appear') ? `<div class="project-view-section"><h4><i class="fas fa-robot"></i> AI Report</h4><pre>${p.aiDesc}</pre></div>` : ''}
   `;
   openModal('projectViewModal');
@@ -2356,11 +2691,11 @@ function renderSavedProjects() {
     <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;gap:10px">
       <div style="flex:1;min-width:0">
         <strong>${p.title}</strong><br>
-        <span style="font-size:.8rem;color:var(--text-muted)">${p.categories?.join(', ') || 'N/A'}</span>
+        <span style="font-size:.8rem;color:var(--text-muted)">${p.categories?.join(', ') || 'N/A'} ${p.media?.length ? '· 📎 ' + p.media.length : ''}</span>
       </div>
       <div class="item-actions">
-        <button class="btn btn-edit btn-sm" onclick="editProject(${p.id})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="btn btn-danger btn-sm" onclick="deleteProject(${p.id})" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="btn btn-edit btn-sm" onclick="editProject(${p.id})"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProject(${p.id})"><i class="fas fa-trash"></i></button>
       </div>
     </div>
   `).join('');
@@ -2378,6 +2713,8 @@ function editProject(id) {
   document.getElementById('pLocation').value = p.location || '';
   document.getElementById('pDate').value = p.date || '';
   document.getElementById('aiOutput').textContent = p.aiDesc || 'AI content will appear here...';
+  currentMediaFiles = p.media ? [...p.media] : [];
+  renderMediaPreview();
   document.querySelectorAll('#categoryCheckboxes input').forEach(c => {
     c.checked = p.categories?.includes(c.value);
     c.closest('.checkbox-item').classList.toggle('checked', c.checked);
@@ -2386,11 +2723,12 @@ function editProject(id) {
   document.getElementById('saveProjectBtn').innerHTML = '<i class="fas fa-save"></i> Update Project';
   document.getElementById('clearFormBtn').style.display = 'inline-flex';
   document.getElementById('projectBuilder').scrollIntoView({ behavior: 'smooth' });
-  showToast('Editing project: ' + p.title, 'info', 2500);
+  showToast('Editing: ' + p.title, 'info');
 }
 
 function clearProjectForm() {
   editingProjectId = null;
+  currentMediaFiles = [];
   document.getElementById('pEditId').value = '';
   document.getElementById('pTitle').value = '';
   document.getElementById('pClient').value = '';
@@ -2399,6 +2737,7 @@ function clearProjectForm() {
   document.getElementById('pLocation').value = '';
   document.getElementById('pDate').value = '';
   document.getElementById('aiOutput').textContent = 'AI content will appear here...';
+  document.getElementById('mediaPreview').innerHTML = '';
   document.querySelectorAll('#categoryCheckboxes input').forEach(c => {
     c.checked = false;
     c.closest('.checkbox-item').classList.remove('checked');
@@ -2419,36 +2758,11 @@ function deleteProject(id) {
 
 function saveProject() {
   const title = document.getElementById('pTitle').value;
-  if (!title) { showToast('Please enter a project title', 'error'); return; }
+  if (!title) { showToast('Please enter a title', 'error'); return; }
   const cats = [];
   document.querySelectorAll('#categoryCheckboxes input:checked').forEach(c => cats.push(c.value));
   
-  if (editingProjectId) {
-    const idx = savedProjects.findIndex(p => p.id === editingProjectId);
-    if (idx !== -1) {
-      savedProjects[idx] = {
-        ...savedProjects[idx],
-        title,
-        client: document.getElementById('pClient').value,
-        date: document.getElementById('pDate').value,
-        location: document.getElementById('pLocation').value,
-        shortDesc: document.getElementById('pShortDesc').value,
-        detailDesc: document.getElementById('pDetailDesc').value,
-        categories: cats,
-        aiDesc: document.getElementById('aiOutput').textContent,
-        slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-      };
-      localStorage.setItem('projects', JSON.stringify(savedProjects));
-      loadProjects();
-      renderSavedProjects();
-      clearProjectForm();
-      showToast('Project updated successfully! ✨', 'success');
-      return;
-    }
-  }
-  
-  const p = {
-    id: Date.now(),
+  const projectData = {
     title,
     client: document.getElementById('pClient').value,
     date: document.getElementById('pDate').value,
@@ -2457,15 +2771,176 @@ function saveProject() {
     detailDesc: document.getElementById('pDetailDesc').value,
     categories: cats,
     aiDesc: document.getElementById('aiOutput').textContent,
+    media: currentMediaFiles,
     slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
   };
+  
+  if (editingProjectId) {
+    const idx = savedProjects.findIndex(p => p.id === editingProjectId);
+    if (idx !== -1) {
+      savedProjects[idx] = { ...savedProjects[idx], ...projectData };
+      localStorage.setItem('projects', JSON.stringify(savedProjects));
+      loadProjects();
+      renderSavedProjects();
+      clearProjectForm();
+      showToast('Project updated! ✨', 'success');
+      return;
+    }
+  }
+  
+  const p = { id: Date.now(), ...projectData };
   savedProjects.push(p);
   localStorage.setItem('projects', JSON.stringify(savedProjects));
   addProjectCard(p);
   renderSavedProjects();
   clearProjectForm();
-  showToast('Project saved successfully! 🎉', 'success');
-  if (document.getElementById('autoMode').checked) autoPublish(p);
+  showToast('Project saved! 🎉', 'success');
+  
+  const autoGh = document.getElementById('autoGithub')?.checked;
+  const autoLi = document.getElementById('autoLinkedin')?.checked;
+  const autoIg = document.getElementById('autoInstagram')?.checked;
+  if (autoGh || autoLi || autoIg) {
+    setTimeout(() => publishToPlatforms(p, autoGh, autoLi, autoIg), 500);
+  }
+}
+
+function openPublishModal() {
+  const title = document.getElementById('pTitle').value;
+  if (!title) { showToast('Please save project first', 'warning'); return; }
+  saveProject();
+  document.getElementById('publishResults').innerHTML = '';
+  openModal('publishModal');
+}
+
+function togglePlatform(el) {
+  setTimeout(() => {
+    const checked = el.querySelector('input').checked;
+    el.classList.toggle('selected', checked);
+  }, 10);
+}
+
+async function executePublish() {
+  const p = savedProjects[savedProjects.length - 1];
+  if (!p) { showToast('No project to publish', 'error'); return; }
+  const gh = document.getElementById('pubGithub').checked;
+  const li = document.getElementById('pubLinkedin').checked;
+  const ig = document.getElementById('pubInstagram').checked;
+  if (!gh && !li && !ig) { showToast('Select at least one platform', 'warning'); return; }
+  await publishToPlatforms(p, gh, li, ig);
+}
+
+async function publishToPlatforms(project, gh, li, ig) {
+  const resultsDiv = document.getElementById('publishResults');
+  if (resultsDiv) resultsDiv.innerHTML = '';
+  
+  if (gh) {
+    showToast('Publishing to GitHub...', 'info');
+    const url = await autoPublishGithub(project);
+    if (url && resultsDiv) {
+      resultsDiv.innerHTML += `
+        <div class="generated-content">
+          <h4><i class="fab fa-github"></i> GitHub Published</h4>
+          <p style="font-size:.85rem;color:var(--text-secondary)">Project URL:</p>
+          <div class="generated-text">${url}</div>
+          <div class="generated-actions">
+            <button class="btn btn-primary btn-sm" onclick="copyText('${url}')"><i class="fas fa-copy"></i> Copy URL</button>
+            <button class="btn btn-outline btn-sm" onclick="window.open('${url}','_blank')"><i class="fas fa-external-link-alt"></i> Open</button>
+          </div>
+        </div>
+      `;
+    }
+  }
+  
+  if (li) {
+    const text = generateLinkedInPost(project);
+    if (resultsDiv) {
+      resultsDiv.innerHTML += `
+        <div class="generated-content">
+          <h4><i class="fab fa-linkedin" style="color:#0077b5"></i> LinkedIn Post</h4>
+          <div class="generated-text" id="liText">${text}</div>
+          <div class="generated-actions">
+            <button class="btn btn-primary btn-sm" onclick="copyText(document.getElementById('liText').textContent)"><i class="fas fa-copy"></i> Copy Text</button>
+            <button class="btn btn-outline btn-sm" onclick="window.open('https://www.linkedin.com/feed/','_blank')"><i class="fas fa-external-link-alt"></i> Open LinkedIn</button>
+          </div>
+        </div>
+      `;
+    }
+    setTimeout(() => window.open('https://www.linkedin.com/feed/', '_blank'), 500);
+  }
+  
+  if (ig) {
+    const text = generateInstagramPost(project);
+    if (resultsDiv) {
+      resultsDiv.innerHTML += `
+        <div class="generated-content">
+          <h4><i class="fab fa-instagram" style="color:#E1306C"></i> Instagram Caption</h4>
+          <div class="generated-text" id="igText">${text}</div>
+          <div class="generated-actions">
+            <button class="btn btn-primary btn-sm" onclick="copyText(document.getElementById('igText').textContent)"><i class="fas fa-copy"></i> Copy Text</button>
+            <button class="btn btn-outline btn-sm" onclick="window.open('https://www.instagram.com/','_blank')"><i class="fas fa-external-link-alt"></i> Open Instagram</button>
+          </div>
+        </div>
+      `;
+    }
+    setTimeout(() => copyText(text), 300);
+    setTimeout(() => window.open('https://www.instagram.com/', '_blank'), 800);
+  }
+}
+
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Copied to clipboard! 📋', 'success');
+  });
+}
+
+function generateLinkedInPost(p) {
+  const cats = p.categories?.join(', ') || 'network infrastructure';
+  const mediaInfo = p.media?.length ? `\n\n📸 See the ${p.media.filter(m=>m.type==='image').length} photos and ${p.media.filter(m=>m.type==='video').length} videos below!` : '';
+  
+  return `🚀 New Project Delivered!
+
+I'm excited to share the successful completion of our latest ${p.title} project${p.client ? ' for ' + p.client : ''}.
+
+${p.shortDesc || 'A comprehensive network infrastructure solution designed and implemented with precision.'}
+
+${p.location ? '📍 Location: ' + p.location : ''}
+${p.date ? '📅 Delivered: ' + p.date : ''}
+🎯 Scope: ${cats}
+
+Key Highlights:
+✅ Professional-grade installation
+✅ Industry-standard testing & certification
+✅ Zero-downtime deployment
+✅ Future-ready design
+
+${p.detailDesc || 'This project reinforces my commitment to delivering reliable network solutions that empower businesses to grow.'}${mediaInfo}
+
+Special thanks to the team and client for the trust!
+
+#NetworkInfrastructure #StructuredCabling #Networking #PassiveNetwork #ITSolutions #CableInstallation #EnterpriseNetworking #DataCenter #ITInfrastructure #NetworkDesign #Telecommunications #ITProfessional`;
+}
+
+function generateInstagramPost(p) {
+  const cats = p.categories?.join(' & ') || 'networking';
+  const mediaCount = p.media?.length || 0;
+  const swipe = mediaCount > 1 ? '\n\n🎥 Swipe to see the transformation ➡️' : '';
+  
+  return `🚀✨ NEW PROJECT UNLOCKED! ✨🚀
+
+Another successful ${p.title}! 💯
+
+${p.shortDesc || 'Precision, expertise, and dedication in every detail.'}
+
+${p.location ? '📍 ' + p.location : ''}
+🔥 Category: ${cats}${swipe}
+
+Every project tells a story of hard work and passion 💪
+
+.
+.
+.
+
+#Networking #StructuredCabling #CableInstallation #TechLife #NetworkEngineer #ITPro #PassiveNetwork #CableManagement #DataCenter #NetworkDesign #TechInstallation #ITInfrastructure #NetworkPro #TechWork #ITLife #NetworkTech #ProInstaller #TechProject #NetworkProject #ITProfessional`;
 }
 
 function generateAI() {
@@ -2474,23 +2949,16 @@ function generateAI() {
   const d = document.getElementById('pShortDesc').value || '';
   const cats = [];
   document.querySelectorAll('#categoryCheckboxes input:checked').forEach(x => cats.push(x.parentElement.textContent.trim()));
+  const mediaCount = currentMediaFiles.length;
+  const imageCount = currentMediaFiles.filter(m => m.type === 'image').length;
+  const videoCount = currentMediaFiles.filter(m => m.type === 'video').length;
+  
   let o = `📋 PROJECT: ${t.toUpperCase()}\n${'═'.repeat(40)}\n\n🏢 Client: ${c}\n`;
-  if (cats.length) o += `🏷️ ${cats.join(', ')}\n`;
+  if (cats.length) o += `🏷️ Categories: ${cats.join(', ')}\n`;
+  if (mediaCount) o += `📎 Media: ${imageCount} images, ${videoCount} videos\n`;
   o += `\n📝 OVERVIEW\n${'-'.repeat(30)}\n${d || 'Professional network infrastructure project.'}\n\n✅ Delivered by Amin Saadati\n${'═'.repeat(40)}`;
   document.getElementById('aiOutput').textContent = o;
-  showToast('AI description generated!', 'success', 2500);
-}
-
-function exportProject() {
-  const c = document.getElementById('aiOutput').textContent;
-  if (c.includes('will appear')) { showToast('Please generate description first', 'warning'); return; }
-  const b = new Blob([c], { type: 'text/plain' });
-  const u = URL.createObjectURL(b);
-  const a = document.createElement('a');
-  a.href = u;
-  a.download = (document.getElementById('pTitle').value || 'project') + '.txt';
-  a.click();
-  showToast('Project exported!', 'success');
+  showToast('AI description generated!', 'success');
 }
 
 document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => {
@@ -2519,17 +2987,55 @@ function loadGHSettings() {
   if (d.branch) document.getElementById('ghBranch').value = d.branch;
 }
 
-async function publishLastProject() {
-  const p = savedProjects[savedProjects.length - 1];
-  if (!p) { showToast('No project to publish', 'warning'); return; }
-  await autoPublish(p);
-}
-
-async function autoPublish(project) {
+async function autoPublishGithub(project) {
   const s = JSON.parse(localStorage.getItem('ghSettings') || '{}');
-  if (!s.token || !s.repo) { showToast('Configure GitHub settings first', 'error'); return; }
-  showToast('Publishing to GitHub...', 'info');
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta property="og:title" content="${project.title}"><meta property="og:description" content="${project.shortDesc || ''}"><title>${project.title}</title><style>body{font-family:Arial;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;background:#0a0a1a;color:#fff}h1{color:#6c63ff}pre{white-space:pre-wrap;background:#1a1a3e;padding:20px;border-radius:12px}</style></head><body><h1>${project.title}</h1><p>${project.shortDesc || ''}</p><pre>${project.aiDesc || ''}</pre></body></html>`;
+  if (!s.token || !s.repo) { showToast('Configure GitHub first', 'error'); return null; }
+  
+  const images = project.media?.filter(m => m.type === 'image') || [];
+  const videos = project.media?.filter(m => m.type === 'video') || [];
+  
+  let galleryHtml = '';
+  if (images.length) {
+    galleryHtml += `<div class="gallery"><h2>📸 Gallery</h2><div class="grid">`;
+    galleryHtml += images.map(img => `<img src="${img.data}" alt="${project.title}">`).join('');
+    galleryHtml += `</div></div>`;
+  }
+  if (videos.length) {
+    galleryHtml += `<div class="gallery"><h2>🎥 Videos</h2>`;
+    galleryHtml += videos.map(v => `<video src="${v.data}" controls style="max-width:100%;margin:10px 0"></video>`).join('');
+    galleryHtml += `</div>`;
+  }
+  
+  const firstImage = images[0]?.data || '';
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta property="og:title" content="${project.title}">
+<meta property="og:description" content="${project.shortDesc || ''}">
+${firstImage ? `<meta property="og:image" content="${firstImage}">` : ''}
+<title>${project.title}</title>
+<style>
+body{font-family:Arial;max-width:900px;margin:40px auto;padding:20px;line-height:1.8;background:#0a0a1a;color:#fff}
+h1{color:#6c63ff;font-size:2.5rem}
+h2{color:#6c63ff;margin-top:30px}
+.meta{color:#888;margin:10px 0}
+pre{white-space:pre-wrap;background:#1a1a3e;padding:20px;border-radius:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:15px}
+.grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;cursor:pointer;transition:transform 0.3s}
+.grid img:hover{transform:scale(1.05)}
+</style>
+</head>
+<body>
+<h1>${project.title}</h1>
+<div class="meta">${project.client ? '🏢 ' + project.client + ' · ' : ''}${project.location ? '📍 ' + project.location + ' · ' : ''}${project.date ? '📅 ' + project.date : ''}</div>
+<p>${project.shortDesc || ''}</p>
+${project.detailDesc ? '<p>' + project.detailDesc + '</p>' : ''}
+${galleryHtml}
+${project.aiDesc ? '<pre>' + project.aiDesc + '</pre>' : ''}
+</body>
+</html>`;
+  
   const encoded = btoa(unescape(encodeURIComponent(html)));
   try {
     await fetch(`https://api.github.com/repos/${s.repo}/contents/projects/${project.slug}/index.html`, {
@@ -2537,73 +3043,141 @@ async function autoPublish(project) {
       headers: { 'Authorization': 'token ' + s.token, 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: 'Add: ' + project.title, content: encoded, branch: s.branch || 'main' })
     });
-    showToast('🚀 Published to GitHub successfully!', 'success', 5000);
-    if (document.getElementById('autoLinkedin').checked) {
-      const [user, repo] = s.repo.split('/');
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://${user}.github.io/${repo}/projects/${project.slug}`)}`, '_blank');
-    }
+    const [user, repo] = s.repo.split('/');
+    const url = `https://${user}.github.io/projects/${project.slug}/`;
+    showToast('Published to GitHub! 🚀', 'success', 5000);
+    return url;
   } catch (e) {
-    showToast('Error publishing: ' + e.message, 'error');
+    showToast('Error: ' + e.message, 'error');
+    return null;
   }
 }
 
-// ===== CONTACT FORM =====
+function checkPasswordStrength() {
+  const pass = document.getElementById('newPass').value;
+  const bar = document.getElementById('passStrengthBar');
+  const rules = {
+    length: pass.length >= 8,
+    upper: /[A-Z]/.test(pass),
+    lower: /[a-z]/.test(pass),
+    number: /[0-9]/.test(pass),
+    special: /[!@#$%^&*(),.?":{}|<>\[\]_+\-=]/.test(pass)
+  };
+  Object.keys(rules).forEach(r => {
+    const el = document.getElementById('rule-' + r);
+    el.classList.toggle('met', rules[r]);
+    el.querySelector('i').className = rules[r] ? 'fas fa-check-circle' : 'fas fa-times-circle';
+  });
+  const score = Object.values(rules).filter(Boolean).length;
+  bar.className = 'password-strength-fill';
+  if (score <= 2) bar.classList.add('strength-weak');
+  else if (score === 3) bar.classList.add('strength-fair');
+  else if (score === 4) bar.classList.add('strength-good');
+  else if (score === 5) bar.classList.add('strength-strong');
+}
+
+async function changePassword() {
+  const current = document.getElementById('currentPass').value;
+  const newPass = document.getElementById('newPass').value;
+  const confirm = document.getElementById('confirmPass').value;
+  
+  if (!current || !newPass || !confirm) { showToast('Fill all fields', 'error'); return; }
+  
+  const currentHash = await sha256(current);
+  const storedHash = localStorage.getItem('adminPassHash') || ADMIN_PASSWORD_HASH;
+  if (currentHash !== storedHash) { showToast('Current password is incorrect', 'error'); return; }
+  
+  const rules = {
+    length: newPass.length >= 8,
+    upper: /[A-Z]/.test(newPass),
+    lower: /[a-z]/.test(newPass),
+    number: /[0-9]/.test(newPass),
+    special: /[!@#$%^&*(),.?":{}|<>\[\]_+\-=]/.test(newPass)
+  };
+  if (!Object.values(rules).every(Boolean)) { showToast('Password does not meet requirements', 'error'); return; }
+  if (newPass !== confirm) { showToast('Passwords do not match', 'error'); return; }
+  if (newPass === current) { showToast('New password must be different', 'error'); return; }
+  
+  const newHash = await sha256(newPass);
+  localStorage.setItem('adminPassHash', newHash);
+  
+  const s = JSON.parse(localStorage.getItem('ghSettings') || '{}');
+  if (s.token && s.repo) {
+    showToast('Updating password in GitHub...', 'info');
+    try {
+      const fileRes = await fetch(`https://api.github.com/repos/${s.repo}/contents/index.html?ref=${s.branch || 'main'}`, {
+        headers: { 'Authorization': 'token ' + s.token }
+      });
+      const fileData = await fileRes.json();
+      let content = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+      content = content.replace(/const ADMIN_PASSWORD_HASH = '[^']+'/, `const ADMIN_PASSWORD_HASH = '${newHash}'`);
+      const encoded = btoa(unescape(encodeURIComponent(content)));
+      await fetch(`https://api.github.com/repos/${s.repo}/contents/index.html`, {
+        method: 'PUT',
+        headers: { 'Authorization': 'token ' + s.token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Update admin password', content: encoded, sha: fileData.sha, branch: s.branch || 'main' })
+      });
+      showToast('Password changed everywhere! 🔐', 'success', 5000);
+    } catch (e) {
+      showToast('Password saved locally. GitHub update failed: ' + e.message, 'warning', 6000);
+    }
+  } else {
+    showToast('Password saved locally. Configure GitHub for global update.', 'warning', 5000);
+  }
+  
+  document.getElementById('currentPass').value = '';
+  document.getElementById('newPass').value = '';
+  document.getElementById('confirmPass').value = '';
+  document.querySelectorAll('.password-rules div').forEach(d => d.classList.remove('met'));
+  document.getElementById('passStrengthBar').className = 'password-strength-fill';
+}
+
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = document.getElementById('contactSubmitBtn');
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
   btn.disabled = true;
-  const params = {
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
     from_name: document.getElementById('cName').value,
     from_email: document.getElementById('cEmail').value,
     subject: document.getElementById('cSubject').value,
     message: document.getElementById('cMessage').value,
-    company: 'N/A',
-    service: 'Contact Form'
-  };
-  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
-    .then(() => {
-      showToast('Message sent successfully! ✨', 'success');
-      e.target.reset();
-      btn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
-      btn.disabled = false;
-    })
-    .catch(err => {
-      console.error(err);
-      showToast('Failed to send message. Please try again.', 'error');
-      btn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
-      btn.disabled = false;
-    });
+    company: 'N/A', service: 'Contact Form'
+  }).then(() => {
+    showToast('Message sent successfully! ✨', 'success');
+    e.target.reset();
+    btn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
+    btn.disabled = false;
+  }).catch(() => {
+    showToast('Failed to send. Try again.', 'error');
+    btn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
+    btn.disabled = false;
+  });
 });
 
-// ===== HIRE FORM =====
 function sendHire(e) {
   e.preventDefault();
   const btn = document.getElementById('hireSubmitBtn');
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>In progress...</span>';
   btn.disabled = true;
-  const params = {
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
     from_name: document.getElementById('hireName').value,
     from_email: document.getElementById('hireEmail').value,
     subject: 'Hire Request from ' + document.getElementById('hireName').value,
     message: document.getElementById('hireMsg').value,
     company: document.getElementById('hireCompany').value || 'N/A',
     service: document.getElementById('hireService').value || 'Not specified'
-  };
-  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
-    .then(() => {
-      showToast('Your hire request successfully sent! 🎉', 'success', 5000);
-      e.target.reset();
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Send Request</span>';
-      btn.disabled = false;
-      setTimeout(() => closeModal('hireModal'), 1500);
-    })
-    .catch(err => {
-      console.error(err);
-      showToast('Failed to send hire request. Please try again.', 'error');
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Send Request</span>';
-      btn.disabled = false;
-    });
+  }).then(() => {
+    showToast('Your hire request successfully sent! 🎉', 'success', 5000);
+    e.target.reset();
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Send Request</span>';
+    btn.disabled = false;
+    setTimeout(() => closeModal('hireModal'), 1500);
+  }).catch(() => {
+    showToast('Failed to send. Try again.', 'error');
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Send Request</span>';
+    btn.disabled = false;
+  });
 }
 
 document.querySelectorAll('.checkbox-item input').forEach(c => c.addEventListener('change', function() {
@@ -2619,9 +3193,7 @@ function initScrollAnimations() {
   handleAOS();
   setTimeout(animateSkillCircles, 800);
   animateCounters();
-  const o = new IntersectionObserver(e => e.forEach(en => {
-    if (en.isIntersecting) animateCounters();
-  }), { threshold: .5 });
+  const o = new IntersectionObserver(e => e.forEach(en => { if (en.isIntersecting) animateCounters(); }), { threshold: .5 });
   document.querySelectorAll('.hero-stats').forEach(el => o.observe(el));
 }
 </script>
